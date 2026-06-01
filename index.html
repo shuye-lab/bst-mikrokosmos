@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BST Mikrokosmos · 芯宇宙</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600&family=Noto+Sans+SC:wght@100;200;300;400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --void: #000005;
+  --ink: #ffffff;
+  --ink-70: rgba(255,255,255,0.70);
+  --ink-45: rgba(255,255,255,0.45);
+  --ink-22: rgba(255,255,255,0.22);
+  --ink-10: rgba(255,255,255,0.10);
+  --ink-05: rgba(255,255,255,0.05);
+  --border: rgba(255,255,255,0.08);
+  --ax:  #4af0ff;
+  --px:  #a78bfa;
+  --mx:  #fb923c;
+  --ex:  #34d399;
+  --ax5: rgba(74,240,255,0.12);
+  --px5: rgba(167,139,250,0.12);
+  --mx5: rgba(251,146,60,0.12);
+  --ex5: rgba(52,211,153,0.12);
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--void);color:var(--ink);
+  font-family:'Inter','Noto Sans SC',sans-serif;
+  overflow-x:hidden;cursor:none;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* CURSOR */
+#cur{position:fixed;width:5px;height:5px;background:#fff;border-radius:50%;pointer-events:none;z-index:9999;transition:transform .06s;}
+#cur-ring{position:fixed;width:26px;height:26px;border:1px solid rgba(255,255,255,.22);border-radius:50%;pointer-events:none;z-index:9998;transition:transform .22s ease,width .15s,height .15s,border-color .15s,background .15s;}
+
+/* CANVAS */
+#universe{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+/* AUDIO */
+#audio-btn{
+  position:fixed;top:24px;right:24px;z-index:200;
+  width:38px;height:38px;border-radius:50%;
+  background:rgba(255,255,255,.05);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .2s;font-size:13px;color:var(--ink-45);
+  backdrop-filter:blur(16px);
+}
+#audio-btn:hover{background:rgba(255,255,255,.1);color:var(--ink);}
+#audio-btn.on{border-color:rgba(74,240,255,.35);color:var(--ax);}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:18px 52px;display:flex;justify-content:space-between;align-items:center;
+  backdrop-filter:blur(24px);border-bottom:1px solid transparent;
+  transition:border-color .4s,background .4s;
+}
+nav.scrolled{border-bottom-color:var(--border);background:rgba(0,0,5,.55);}
+.nav-logo{font-family:'Space Grotesk',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.14em;color:var(--ink-45);}
+.nav-logo b{color:var(--ink);font-weight:600;}
+.nav-right{font-family:'Space Grotesk',sans-serif;font-size:.58rem;letter-spacing:.22em;color:var(--ink-22);font-weight:300;}
+
+/* LAYOUT */
+section{position:relative;z-index:2;}
+.wrap{max-width:980px;margin:0 auto;padding:0 52px;}
+.wrap-sm{max-width:720px;margin:0 auto;padding:0 52px;}
+
+/* EYEBROW */
+.eyebrow{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:.56rem;font-weight:400;letter-spacing:.32em;
+  text-transform:uppercase;color:var(--ink-22);
+  display:flex;align-items:center;gap:14px;
+}
+.ey-line{flex:0 0 28px;height:1px;background:var(--ink-10);}
+
+/* SECTION TITLE */
+.s-title{font-size:clamp(1.9rem,3.8vw,3rem);font-weight:200;line-height:1.28;letter-spacing:-.028em;margin-top:1.4rem;margin-bottom:1rem;}
+.s-title strong{font-weight:500;display:block;}
+.s-title em{font-style:normal;color:var(--ink-45);font-weight:100;}
+
+/* ══ HERO ══ */
+#hero{
+  min-height:100vh;z-index:2;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:120px 24px 80px;overflow:hidden;
+}
+
+.hero-anniversary{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:.58rem;letter-spacing:.35em;font-weight:400;
+  color:var(--ink-22);text-transform:uppercase;
+  margin-bottom:2.5rem;
+  animation:fadeUp .9s ease .1s both;
+}
+
+.hero-wordmark{line-height:.88;margin-bottom:.7rem;animation:fadeUp .9s ease .25s both;}
+.hw-bst{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(4rem,11vw,10rem);font-weight:700;
+  letter-spacing:-.03em;color:var(--ink);display:block;
+}
+.hw-micro{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(1.6rem,5vw,4.5rem);font-weight:300;
+  letter-spacing:.02em;color:var(--ink-22);display:block;
+}
+
+.hero-cn{
+  font-family:'Noto Sans SC',sans-serif;
+  font-size:clamp(.8rem,1.6vw,1rem);font-weight:100;
+  letter-spacing:.7em;color:var(--ink-22);
+  margin-top:.8rem;margin-bottom:1.6rem;
+  animation:fadeUp .9s ease .38s both;
+}
+
+/* 10th badge */
+.tenth-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  border:1px solid rgba(74,240,255,.2);
+  padding:8px 20px;margin-bottom:3rem;
+  animation:fadeUp .9s ease .5s both;
+}
+.tb-num{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:1.5rem;font-weight:700;letter-spacing:-.03em;
+  background:linear-gradient(135deg,var(--ax),var(--px));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.tb-text{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:.58rem;letter-spacing:.2em;font-weight:400;
+  text-transform:uppercase;color:var(--ink-45);line-height:1.5;
+  text-align:left;
+}
+
+.hero-divider{width:1px;height:44px;background:linear-gradient(to bottom,transparent,var(--ink-10),transparent);margin:0 auto 3rem;animation:fadeUp .9s ease .6s both;}
+
+.hero-body{
+  max-width:480px;margin:0 auto;
+  font-size:1rem;font-weight:200;line-height:2.05;color:var(--ink-45);
+  animation:fadeUp .9s ease .72s both;
+}
+.hero-body strong{font-weight:400;color:var(--ink);}
+
+.scroll-cue{position:absolute;bottom:2.5rem;display:flex;flex-direction:column;align-items:center;gap:8px;animation:fadeUp .9s ease 1.1s both;}
+.sc-line{width:1px;height:44px;background:linear-gradient(to bottom,var(--ink-10),transparent);}
+.sc-txt{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.3em;color:var(--ink-22);}
+
+/* ══ MANIFESTO ══ */
+#manifesto{padding:160px 0;}
+.mani-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.mani-l{opacity:0;transform:translateY(28px);transition:opacity .9s,transform .9s;}
+.mani-l.vis{opacity:1;transform:translateY(0);}
+.mani-headline{font-size:clamp(2rem,4vw,3.2rem);font-weight:200;line-height:1.28;letter-spacing:-.028em;margin-top:1.5rem;}
+.mani-headline strong{font-weight:500;color:var(--ink);display:block;}
+.mani-headline em{font-style:normal;color:var(--ink-45);font-weight:100;}
+.mani-r{opacity:0;transform:translateY(28px);transition:opacity .9s .14s,transform .9s .14s;padding-top:3.8rem;}
+.mani-r.vis{opacity:1;transform:translateY(0);}
+.mani-body{font-size:.88rem;font-weight:200;line-height:2.25;color:var(--ink-45);margin-bottom:1.4rem;}
+.mani-body strong{font-weight:400;color:var(--ink-70);}
+.mani-quote{border-left:1px solid var(--ink-10);padding-left:1.5rem;font-size:.84rem;font-weight:200;line-height:2.05;color:var(--ink-22);font-style:italic;}
+
+/* ══ INTERACTIVE AXES ══ */
+#axes{padding:160px 0;border-top:1px solid var(--border);}
+
+.axes-top{text-align:center;max-width:560px;margin:0 auto 80px;}
+.axes-top .s-title{margin-top:1.4rem;}
+
+/* The interactive stage */
+.axes-stage{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:var(--border);border:1px solid var(--border);
+}
+
+.ax-cell{
+  position:relative;background:var(--void);
+  padding:0;overflow:hidden;
+  cursor:pointer;
+  transition:background .35s;
+  min-height:220px;
+}
+.ax-cell:hover,.ax-cell.active{background:#060810;}
+
+/* Resting state — just the axis label */
+.ax-rest{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;
+  padding:36px 40px;
+  transition:opacity .35s,transform .35s;
+  pointer-events:none;
+}
+.ax-cell.active .ax-rest{opacity:0;transform:translateY(-8px);}
+
+.ax-rest-num{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:5rem;font-weight:700;letter-spacing:-.04em;line-height:1;
+  color:var(--ink-05);position:absolute;right:24px;top:18px;
+  transition:color .35s;
+}
+.ax-cell:hover .ax-rest-num{color:var(--ink-10);}
+
+.ax-rest-label{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:.56rem;letter-spacing:.28em;font-weight:400;
+  text-transform:uppercase;margin-bottom:.5rem;
+  display:flex;align-items:center;gap:8px;
+}
+.ax-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+
+.ax-rest-en{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:2rem;font-weight:600;letter-spacing:-.02em;line-height:1;margin-bottom:.2rem;
+}
+.ax-rest-cn{
+  font-family:'Noto Sans SC',sans-serif;
+  font-size:.65rem;font-weight:100;letter-spacing:.2em;color:var(--ink-22);
+}
+
+/* Hover hint */
+.ax-hint{
+  position:absolute;top:32px;right:32px;
+  font-family:'Space Grotesk',sans-serif;font-size:.52rem;
+  letter-spacing:.18em;color:var(--ink-22);
+  transition:opacity .3s;
+}
+.ax-cell.active .ax-hint{opacity:0;}
+
+/* Expanded state */
+.ax-expand{
+  position:absolute;inset:0;padding:36px 40px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  opacity:0;transform:translateY(10px);
+  transition:opacity .35s,transform .35s;
+  pointer-events:none;
+}
+.ax-cell.active .ax-expand{opacity:1;transform:translateY(0);pointer-events:auto;}
+
+.ax-exp-tag{
+  font-family:'Space Grotesk',sans-serif;font-size:.52rem;letter-spacing:.28em;
+  font-weight:400;text-transform:uppercase;
+  display:flex;align-items:center;gap:8px;
+}
+.ax-exp-title{font-size:1.1rem;font-weight:500;letter-spacing:-.01em;margin:.5rem 0 .6rem;line-height:1.3;}
+.ax-exp-body{font-size:.78rem;font-weight:200;line-height:2;color:var(--ink-45);flex:1;}
+.ax-exp-body strong{font-weight:400;color:var(--ink-70);}
+
+/* Progress bar at bottom */
+.ax-exp-bar{height:1px;background:var(--border);position:relative;overflow:hidden;margin-top:1.5rem;}
+.ax-exp-fill{position:absolute;inset-y:0;left:0;width:0;transition:width 1.2s cubic-bezier(.16,1,.3,1) .2s;}
+.ax-cell.active .ax-exp-fill{width:var(--fill-w);}
+
+/* Close hint */
+.ax-close{
+  position:absolute;top:28px;right:28px;
+  font-family:'Space Grotesk',sans-serif;font-size:.5rem;
+  letter-spacing:.18em;color:var(--ink-22);
+  opacity:0;transition:opacity .3s .2s;
+}
+.ax-cell.active .ax-close{opacity:1;}
+
+/* Below axes — selection concept */
+.axes-below{
+  margin-top:64px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;
+  opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s;
+}
+.axes-below.vis{opacity:1;transform:translateY(0);}
+
+.ab-left{}
+.ab-label{font-family:'Space Grotesk',sans-serif;font-size:.55rem;letter-spacing:.28em;color:var(--ink-22);margin-bottom:1.2rem;text-transform:uppercase;}
+.ab-headline{font-size:clamp(1.4rem,2.8vw,2.2rem);font-weight:200;line-height:1.35;letter-spacing:-.02em;margin-bottom:1.2rem;}
+.ab-headline strong{font-weight:500;}
+.ab-body{font-size:.84rem;font-weight:200;line-height:2.1;color:var(--ink-45);}
+.ab-body strong{font-weight:400;color:var(--ink-70);}
+
+.ab-right{display:flex;flex-direction:column;gap:10px;}
+.ab-point{
+  border:1px solid var(--border);padding:14px 18px;
+  font-size:.78rem;font-weight:200;line-height:1.7;color:var(--ink-45);
+  display:flex;gap:12px;align-items:flex-start;
+  transition:border-color .2s,background .2s;
+}
+.ab-point:hover{border-color:rgba(255,255,255,.16);background:var(--ink-05);}
+.ab-arrow{color:var(--ink-22);font-size:.6rem;margin-top:.15rem;flex-shrink:0;font-family:'Space Grotesk',sans-serif;}
+.ab-point strong{font-weight:400;color:var(--ink-70);}
+
+/* ══ EXPAND SECTION ══ */
+#expand{padding:160px 0;border-top:1px solid var(--border);}
+.exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:120px;align-items:center;}
+.exp-left{opacity:0;transform:translateX(-24px);transition:opacity .9s,transform .9s;}
+.exp-left.vis{opacity:1;transform:translateX(0);}
+.exp-kicker{margin-bottom:1.5rem;}
+.exp-h{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:200;line-height:1.3;letter-spacing:-.025em;margin-bottom:1.5rem;}
+.exp-h strong{font-weight:500;display:block;}
+.exp-p{font-size:.86rem;font-weight:200;line-height:2.2;color:var(--ink-45);margin-bottom:1rem;}
+.exp-p strong{font-weight:400;color:var(--ink-70);}
+.exp-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid var(--border);padding:8px 16px;margin-top:.5rem;
+  font-family:'Space Grotesk',sans-serif;font-size:.58rem;
+  letter-spacing:.16em;font-weight:400;text-transform:uppercase;color:var(--ink-22);
+}
+.exp-right{opacity:0;transform:translateX(24px);transition:opacity .9s .14s,transform .9s .14s;}
+.exp-right.vis{opacity:1;transform:translateX(0);}
+#coordCanvas{width:100%;aspect-ratio:1;display:block;max-width:340px;margin:0 auto;}
+
+/* ══ STORY ══ */
+#story{padding:160px 0;border-top:1px solid var(--border);}
+.story-intro{text-align:center;max-width:520px;margin:0 auto 80px;}
+.story-rows{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);}
+.story-row{
+  background:var(--void);padding:52px 56px;
+  display:grid;grid-template-columns:96px 1fr;gap:56px;align-items:start;
+  opacity:0;transform:translateY(18px);
+  transition:opacity .7s,transform .7s,background .25s;
+}
+.story-row.vis{opacity:1;transform:translateY(0);}
+.story-row:hover{background:#07070f;}
+.sr-time{font-family:'Space Grotesk',sans-serif;font-size:.52rem;letter-spacing:.16em;font-weight:400;text-transform:uppercase;color:var(--ink-22);line-height:1.7;padding-top:.1rem;}
+.sr-time b{display:block;font-size:1.5rem;font-weight:200;letter-spacing:-.04em;color:var(--ink-10);line-height:1;margin-bottom:.4rem;}
+.sr-title{font-size:1.08rem;font-weight:400;letter-spacing:-.01em;line-height:1.45;margin-bottom:.85rem;}
+.sr-title em{font-style:normal;color:var(--ink-22);font-weight:200;}
+.sr-body{font-size:.82rem;font-weight:200;line-height:2.2;color:var(--ink-22);margin-bottom:1rem;}
+.sr-body strong{font-weight:400;color:var(--ink-45);}
+.sr-code{
+  background:rgba(255,255,255,.022);border:1px solid var(--border);
+  border-left:1px solid rgba(74,240,255,.15);
+  padding:14px 18px;font-family:'Space Grotesk',monospace;
+  font-size:.67rem;line-height:2;color:var(--ink-22);
+}
+.ca{color:var(--ax);} .cp{color:var(--px);} .cg{color:#4ade80;} .co{color:var(--mx);}
+
+/* ══ DIALOG ══ */
+#dialog{padding:160px 0;border-top:1px solid var(--border);}
+.dlg-intro{text-align:center;max-width:480px;margin:0 auto 60px;}
+.dlg-shell{border:1px solid var(--border);background:rgba(255,255,255,.016);backdrop-filter:blur(20px);}
+.dlg-bar{padding:13px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;font-family:'Space Grotesk',sans-serif;font-size:.58rem;letter-spacing:.14em;color:var(--ink-22);}
+.dd{width:7px;height:7px;border-radius:50%;}
+.dd-g{background:#34d399;}
+.dd-p{background:var(--ax);animation:pulse 2s ease-in-out infinite;}
+.dlg-body{padding:28px;}
+.sys-row{border:1px solid var(--border);border-left:1px solid rgba(74,240,255,.15);padding:13px 16px;font-size:.78rem;font-weight:200;line-height:2;color:var(--ink-22);margin-bottom:16px;display:flex;gap:10px;align-items:flex-start;}
+.sys-chip{font-family:'Space Grotesk',sans-serif;font-size:.48rem;letter-spacing:.14em;border:1px solid rgba(74,240,255,.18);color:var(--ax);padding:2px 6px;flex-shrink:0;margin-top:2px;font-weight:400;}
+.presets{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px;}
+.preset{background:transparent;border:1px solid var(--border);color:var(--ink-22);padding:7px 13px;font-size:.73rem;font-weight:200;font-family:'Noto Sans SC',sans-serif;cursor:pointer;transition:all .2s;}
+.preset:hover{border-color:rgba(255,255,255,.2);color:var(--ink-45);}
+.input-row{display:flex;gap:7px;}
+.d-input{flex:1;background:transparent;border:1px solid var(--border);color:var(--ink);padding:11px 14px;font-size:.82rem;font-weight:200;font-family:'Noto Sans SC',sans-serif;outline:none;transition:border-color .2s;}
+.d-input:focus{border-color:rgba(255,255,255,.2);}
+.d-input::placeholder{color:var(--ink-22);font-size:.76rem;}
+.d-send{background:transparent;border:1px solid var(--border);color:var(--ink-22);padding:11px 22px;font-family:'Space Grotesk',sans-serif;font-size:.6rem;letter-spacing:.16em;font-weight:400;text-transform:uppercase;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.d-send:hover:not(:disabled){border-color:rgba(255,255,255,.25);color:var(--ink-45);}
+.d-send:disabled{opacity:.3;cursor:not-allowed;}
+.d-resp{margin-top:22px;border-top:1px solid var(--border);padding-top:22px;display:none;}
+.d-resp.show{display:block;}
+.d-ai-tag{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.22em;color:var(--ax);margin-bottom:12px;display:flex;align-items:center;gap:6px;font-weight:400;text-transform:uppercase;}
+.d-ai-text{font-size:.88rem;font-weight:200;line-height:2.2;color:var(--ink-45);}
+
+/* ══ WISHES ══ */
+#wishes{padding:160px 0;border-top:1px solid var(--border);}
+.wishes-top{text-align:center;margin-bottom:80px;}
+.wish-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);}
+.wish-card{
+  background:var(--void);padding:44px 34px;
+  opacity:0;transform:translateY(16px);
+  transition:opacity .6s,transform .6s,background .25s;
+}
+.wish-card.vis{opacity:1;transform:translateY(0);}
+.wish-card:hover{background:#07070f;}
+.wc-role{font-family:'Space Grotesk',sans-serif;font-size:.52rem;letter-spacing:.24em;font-weight:400;text-transform:uppercase;margin-bottom:1.75rem;display:flex;align-items:center;gap:8px;color:var(--ink-22);}
+.wc-dot{width:4px;height:4px;border-radius:50%;}
+.wc-text{font-size:.85rem;font-weight:200;line-height:2.05;color:var(--ink-45);font-style:italic;margin-bottom:1.5rem;}
+.wc-name{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.2em;font-weight:400;color:var(--ink-22);text-transform:uppercase;}
+
+/* ══ FOOTER ══ */
+footer{position:relative;z-index:2;padding:80px 52px;border-top:1px solid var(--border);text-align:center;}
+.ft-logo{font-family:'Space Grotesk',sans-serif;font-size:.6rem;letter-spacing:.32em;font-weight:500;text-transform:uppercase;color:var(--ink-22);margin-bottom:.6rem;}
+.ft-sub{font-size:.55rem;font-weight:200;letter-spacing:.18em;color:var(--ink-10);font-family:'Space Grotesk',sans-serif;}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(74,240,255,.4)}50%{box-shadow:0 0 0 5px rgba(74,240,255,0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.cblink{display:inline-block;width:1.5px;height:.85em;background:var(--ax);vertical-align:middle;margin-left:1px;animation:blink 1s step-end infinite;}
+
+@media(max-width:768px){
+  .wrap,.wrap-sm{padding:0 24px;}
+  nav{padding:18px 24px;}
+  .mani-grid,.exp-grid{grid-template-columns:1fr;gap:48px;}
+  .axes-stage{grid-template-columns:1fr;}
+  .axes-below{grid-template-columns:1fr;}
+  .story-row{grid-template-columns:1fr;gap:12px;padding:36px 24px;}
+  .wish-grid{grid-template-columns:1fr;}
+  .exp-right{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-ring"></div>
+<canvas id="universe"></canvas>
+<button id="audio-btn" onclick="toggleAudio()" title="BGM: Mikrokosmos · BTS">♪</button>
+<audio id="bgm" loop></audio>
+
+<nav id="nav">
+  <div class="nav-logo"><b>BST</b> Mikrokosmos</div>
+  <div class="nav-right">芯宇宙 · 10th Anniversary · 2026</div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-anniversary">BST Toolchain Team · Since 2016</div>
+
+  <div class="hero-wordmark">
+    <span class="hw-bst">BST</span>
+    <span class="hw-micro">Mikrokosmos</span>
+  </div>
+  <div class="hero-cn">芯 · 宇 · 宙</div>
+
+  <div class="tenth-badge">
+    <span class="tb-num">10th</span>
+    <span class="tb-text">Anniversary<br>2026</span>
+  </div>
+
+  <div class="hero-divider"></div>
+
+  <p class="hero-body">
+    芯片是一个小宇宙。<br>
+    工具链，是这个宇宙的<strong>时空坐标轴</strong>。<br>
+    每一个目标的微小偏移，都通向<strong>一个全然不同的未来</strong>。
+  </p>
+
+  <div class="scroll-cue">
+    <div class="sc-line"></div>
+    <div class="sc-txt">Scroll</div>
+  </div>
+</section>
+
+<!-- ══ MANIFESTO ══ -->
+<section id="manifesto">
+  <div class="wrap">
+    <div class="mani-grid">
+      <div class="mani-l" data-obs>
+        <div class="eyebrow"><div class="ey-line"></div>Manifesto · 宣言</div>
+        <h2 class="mani-headline">
+          <em>每一次选择</em>
+          <strong>都是一次宇宙跃迁</strong>
+        </h2>
+      </div>
+      <div class="mani-r" data-obs>
+        <p class="mani-body">在精度、性能、存储、环境四条坐标轴张开的超大相空间里，目标参数的一点点偏移，就意味着通向<strong>截然不同的多元宇宙坐标点</strong>。</p>
+        <p class="mani-body">工程师能探索的时空是有限的。但当<strong>人类的直觉</strong>与<strong>AI 的算力</strong>结合，探索半径成倍扩展——让客户模型自适应达到最好的效果。</p>
+        <div class="mani-quote">工程师把目光聚焦于世界观的构建，<br>把 dirty work 留给工具链。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ INTERACTIVE AXES ══ -->
+<section id="axes">
+  <div class="wrap">
+    <div class="axes-top" data-obs>
+      <div class="eyebrow" style="justify-content:center"><div class="ey-line"></div>The Coordinate System · 时空坐标轴<div class="ey-line"></div></div>
+      <h2 class="s-title" style="text-align:center">
+        <em>工具链的维度</em>
+        <strong>定义了可能性的边界</strong>
+      </h2>
+      <p style="font-size:.82rem;font-weight:200;line-height:2;color:var(--ink-22);margin-top:.5rem">点击任意坐标轴，展开这个维度的世界观</p>
+    </div>
+
+    <!-- Interactive grid -->
+    <div class="axes-stage" id="axesStage">
+
+      <div class="ax-cell" data-ax="0" onclick="toggleAx(this)">
+        <div class="ax-rest">
+          <div class="ax-rest-num">01</div>
+          <div class="ax-rest-label"><div class="ax-dot" style="background:var(--ax)"></div><span style="color:var(--ax)">Accuracy</span></div>
+          <div class="ax-rest-en" style="color:var(--ax)">精度轴</div>
+          <div class="ax-rest-cn">Model Accuracy</div>
+        </div>
+        <div class="ax-hint">Click to explore →</div>
+        <div class="ax-close">× Close</div>
+        <div class="ax-expand">
+          <div>
+            <div class="ax-exp-tag"><div class="ax-dot" style="background:var(--ax)"></div><span style="color:var(--ax);font-family:'Space Grotesk',sans-serif;font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;">Accuracy · 精度</span></div>
+            <div class="ax-exp-title">每一个 bit，都是一次选择</div>
+            <p class="ax-exp-body">量化方案、算子精度、数值稳定性——精度轴上的每个刻度，决定了<strong>客户模型能走多远</strong>。掉精度不是失败，是没找到正确的坐标点。工具链的职责是把搜索空间从无限压缩到可解。</p>
+          </div>
+          <div>
+            <div class="ax-exp-bar"><div class="ax-exp-fill" style="background:var(--ax);--fill-w:88%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ax-cell" data-ax="1" onclick="toggleAx(this)">
+        <div class="ax-rest">
+          <div class="ax-rest-num">02</div>
+          <div class="ax-rest-label"><div class="ax-dot" style="background:var(--px)"></div><span style="color:var(--px)">Performance</span></div>
+          <div class="ax-rest-en" style="color:var(--px)">性能轴</div>
+          <div class="ax-rest-cn">Throughput &amp; Latency</div>
+        </div>
+        <div class="ax-hint">Click to explore →</div>
+        <div class="ax-close">× Close</div>
+        <div class="ax-expand">
+          <div>
+            <div class="ax-exp-tag"><div class="ax-dot" style="background:var(--px)"></div><span style="color:var(--px);font-family:'Space Grotesk',sans-serif;font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;">Performance · 性能</span></div>
+            <div class="ax-exp-title">算力不是极限，是起点</div>
+            <p class="ax-exp-body">吞吐量、时延、利用率——<strong>瓶颈永远藏在你以为没问题的地方</strong>。benchmark 是这条轴上的眼睛，compiler 是改变轨迹的手。工具链让算力真正跑满，而不是在等待中消耗。</p>
+          </div>
+          <div>
+            <div class="ax-exp-bar"><div class="ax-exp-fill" style="background:var(--px);--fill-w:94%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ax-cell" data-ax="2" onclick="toggleAx(this)">
+        <div class="ax-rest">
+          <div class="ax-rest-num">03</div>
+          <div class="ax-rest-label"><div class="ax-dot" style="background:var(--mx)"></div><span style="color:var(--mx)">Memory</span></div>
+          <div class="ax-rest-en" style="color:var(--mx)">存储轴</div>
+          <div class="ax-rest-cn">Memory &amp; Bandwidth</div>
+        </div>
+        <div class="ax-hint">Click to explore →</div>
+        <div class="ax-close">× Close</div>
+        <div class="ax-expand">
+          <div>
+            <div class="ax-exp-tag"><div class="ax-dot" style="background:var(--mx)"></div><span style="color:var(--mx);font-family:'Space Grotesk',sans-serif;font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;">Memory · 存储</span></div>
+            <div class="ax-exp-title">在有限的硅上，编排无限的可能</div>
+            <p class="ax-exp-body">片上内存、带宽墙、缓存策略——存储不够不是模型的问题，是<strong>编排方式的问题</strong>。operator 的调度顺序决定了数据流的命运。工具链重新排列时空，让模型在边界内完整运行。</p>
+          </div>
+          <div>
+            <div class="ax-exp-bar"><div class="ax-exp-fill" style="background:var(--mx);--fill-w:78%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ax-cell" data-ax="3" onclick="toggleAx(this)">
+        <div class="ax-rest">
+          <div class="ax-rest-num">04</div>
+          <div class="ax-rest-label"><div class="ax-dot" style="background:var(--ex)"></div><span style="color:var(--ex)">Environment</span></div>
+          <div class="ax-rest-en" style="color:var(--ex)">环境轴</div>
+          <div class="ax-rest-cn">Hardware &amp; Runtime</div>
+        </div>
+        <div class="ax-hint">Click to explore →</div>
+        <div class="ax-close">× Close</div>
+        <div class="ax-expand">
+          <div>
+            <div class="ax-exp-tag"><div class="ax-dot" style="background:var(--ex)"></div><span style="color:var(--ex);font-family:'Space Grotesk',sans-serif;font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;">Environment · 环境</span></div>
+            <div class="ax-exp-title">同一个模型，在每颗芯片上重新出生</div>
+            <p class="ax-exp-body">不同架构、驱动版本、运行时约束——<strong>同一套权重在不同硬件上是完全不同的生命体</strong>。QA 是这条轴上的守门人。工具链是跨宇宙的翻译器，让模型在任何星球都能正常呼吸。</p>
+          </div>
+          <div>
+            <div class="ax-exp-bar"><div class="ax-exp-fill" style="background:var(--ex);--fill-w:83%"></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /axes-stage -->
+
+    <!-- Selection concept below -->
+    <div class="axes-below" data-obs>
+      <div class="ab-left">
+        <div class="ab-label">The Choice · 选择的本质</div>
+        <h3 class="ab-headline">坐标轴定义维度，<br><strong>你的选择决定宇宙</strong></h3>
+        <p class="ab-body">这四条轴只是我们今天能命名的维度。每当我们发现新的系统性问题，就是在<strong>发现一条新的坐标轴</strong>——工具链的边界，随着团队的认知一起扩展。</p>
+      </div>
+      <div class="ab-right">
+        <div class="ab-point">
+          <span class="ab-arrow">→</span>
+          <span>精度目标偏移 1%，可能意味着<strong>完全不同的量化策略</strong>和算子实现</span>
+        </div>
+        <div class="ab-point">
+          <span class="ab-arrow">→</span>
+          <span>性能目标提升 2x，可能需要<strong>重新设计整个 pass 调度顺序</strong></span>
+        </div>
+        <div class="ab-point">
+          <span class="ab-arrow">→</span>
+          <span>内存限制缩减一半，模型的<strong>生死边界</strong>就在 operator 的排列方式里</span>
+        </div>
+        <div class="ab-point">
+          <span class="ab-arrow">→</span>
+          <span>换一颗芯片，过去所有经验<strong>重新归零</strong>——直到工具链说它懂了</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ HUMAN × AI ══ -->
+<section id="expand">
+  <div class="wrap">
+    <div class="exp-grid">
+      <div class="exp-left" data-obs>
+        <div class="eyebrow exp-kicker"><div class="ey-line"></div>Human × AI · 多元宇宙探索</div>
+        <h2 class="exp-h">工程师能探索的时空<strong>是有限的</strong></h2>
+        <p class="exp-p">在四维坐标轴张开的超大相空间里，穷举所有可能需要数百年。</p>
+        <p class="exp-p">但当<strong>工程师的直觉</strong>与<strong>AI 的算力</strong>结合，探索半径成倍扩展——测试覆盖更全，瓶颈自动定位，模型自适应收敛到最优坐标点。</p>
+        <p class="exp-p">工程师从此可以把目光聚焦于<strong>世界观的构建</strong>，把 dirty work 留给工具链。</p>
+        <div class="exp-pill"><div class="ax-dot" style="background:var(--ax);width:5px;height:5px"></div>人类直觉 × AI 算力 = 全域探索</div>
+      </div>
+      <div class="exp-right" data-obs>
+        <canvas id="coordCanvas"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STORY ══ -->
+<section id="story">
+  <div class="wrap">
+    <div class="story-intro" data-obs>
+      <div class="eyebrow" style="justify-content:center"><div class="ey-line"></div>2030 · A Day in the Future<div class="ey-line"></div></div>
+      <h2 class="s-title" style="text-align:center"><em>那一天</em><strong>工具链已替你工作了一整夜</strong></h2>
+    </div>
+    <div class="story-rows">
+
+      <div class="story-row" data-obs>
+        <div class="sr-time"><b>08:47</b>Morning</div>
+        <div>
+          <h3 class="sr-title">PR 已就绪，<em>Alex 还没到</em></h3>
+          <p class="sr-body">Alex 打开显示器，日报已推送。昨晚 23:11，工具链在<strong>精度-性能平面</strong>上自动搜索 2400 个候选点，锁定客户模型最优配置，提交了 PR，附完整 benchmark 报告。</p>
+          <div class="sr-code">
+            <span class="cg">✓</span> <span class="ca">toolchain-bot</span> opened PR #2847 · 23:11<br>
+            <span class="cp">search_space:</span> <span class="co">2,400 candidates</span> across [acc × perf]<br>
+            <span class="ca">optimal:</span> acc=98.7% · thr=340 tok/s · mem=4.1GB
+          </div>
+        </div>
+      </div>
+
+      <div class="story-row" data-obs style="transition-delay:80ms">
+        <div class="sr-time"><b>10:30</b>Morning</div>
+        <div>
+          <h3 class="sr-title">瓶颈在哪里，<em>工具链说</em></h3>
+          <p class="sr-body">客户反馈时延偏高。以前需要逐层手动 profile，耗时一天。工具链自动标注<strong>热点 operator</strong>，给出三条优化路径并预测各路径在目标芯片上的收益。compiler 团队 20 分钟做决策，剩下交给工具链跑。</p>
+        </div>
+      </div>
+
+      <div class="story-row" data-obs style="transition-delay:160ms">
+        <div class="sr-time"><b>14:30</b>Afternoon</div>
+        <div>
+          <h3 class="sr-title">三颗星球，<em>同一个模型</em></h3>
+          <p class="sr-body">客户需在三种架构的芯片上部署同一模型。工具链在<strong>环境轴</strong>上自动生成三套编译策略，accuracy 全程有 QA 守护，全程无需手动迁移。测试覆盖 100%，没有一个算子掉进死角。</p>
+          <div class="sr-code">
+            <span class="cg">✓</span> arch_A: <span class="co">+22% throughput</span><br>
+            <span class="cg">✓</span> arch_B: <span class="co">-18% memory</span> · latency within SLA<br>
+            <span class="cg">✓</span> arch_C: <span class="cp">accuracy preserved</span> · 99.1% pass rate
+          </div>
+        </div>
+      </div>
+
+      <div class="story-row" data-obs style="transition-delay:240ms">
+        <div class="sr-time"><b>17:55</b>Evening</div>
+        <div>
+          <h3 class="sr-title">工程师在思考，<em>而不是在找 bug</em></h3>
+          <p class="sr-body">Alex 合上电脑。今天没有一次手动 profile，没有一次通宵排查。她把整个下午花在更根本的问题上：坐标轴本身，应不应该增加新的维度？<br><br>这才是工程师真正该做的事。</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ DIALOG ══ -->
+<section id="dialog">
+  <div class="wrap-sm">
+    <div class="dlg-intro" data-obs>
+      <div class="eyebrow" style="justify-content:center"><div class="ey-line"></div>Ask 2030 · 与未来对话<div class="ey-line"></div></div>
+      <h2 class="s-title" style="text-align:center"><em>连接</em><strong>2030 年的工具链</strong></h2>
+    </div>
+    <div class="dlg-shell" data-obs>
+      <div class="dlg-bar">
+        <div class="dd dd-g"></div><div class="dd dd-p"></div>
+        <span style="margin-left:6px">toolchain-2030 · Mikrokosmos Coordinate System · Online</span>
+      </div>
+      <div class="dlg-body">
+        <div class="sys-row">
+          <span class="sys-chip">SYS</span>
+          <span>你正在连接 2030 年的工具链 AI。它见证了这支团队如何在坐标轴上拓展可探索的宇宙边界。向它提问——</span>
+        </div>
+        <div class="presets">
+          <button class="preset" onclick="askQ(this)">2030年工程师的一天是怎样的？</button>
+          <button class="preset" onclick="askQ(this)">工具链帮我们探索了多少个坐标点？</button>
+          <button class="preset" onclick="askQ(this)">给现在的我们一句话</button>
+          <button class="preset" onclick="askQ(this)">最难突破的坐标轴是哪一条？</button>
+        </div>
+        <div class="input-row">
+          <input class="d-input" id="dInput" placeholder="向 2030 年的工具链提问…" maxlength="120">
+          <button class="d-send" id="dSend" onclick="sendQ()">Send →</button>
+        </div>
+        <div class="d-resp" id="dResp">
+          <div class="d-ai-tag"><div class="dd dd-p" style="width:5px;height:5px"></div>Mikrokosmos · toolchain-2030</div>
+          <div class="d-ai-text" id="dText"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WISHES ══ -->
+<section id="wishes">
+  <div class="wrap">
+    <div class="wishes-top" data-obs>
+      <div class="eyebrow" style="justify-content:center"><div class="ey-line"></div>Team Wishes · 团队寄语<div class="ey-line"></div></div>
+      <h2 class="s-title" style="text-align:center"><em>写给</em><strong>坐标轴另一端的自己</strong></h2>
+    </div>
+    <div class="wish-grid" id="wishGrid"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-logo">BST · Toolchain Team · Mikrokosmos · 芯宇宙</div>
+  <div class="ft-sub">10th Anniversary · 2026 · shuye · every commit is a vote for the future</div>
+</footer>
+
+<script>
+/* ══ STARS ══ */
+const uC=document.getElementById('universe'),uc=uC.getContext('2d');
+let UW,UH;
+const AC=[['rgba(74,240,255,'],['rgba(167,139,250,'],['rgba(251,146,60,'],['rgba(52,211,153,']];
+function rU(){UW=uC.width=window.innerWidth;UH=uC.height=window.innerHeight;}
+rU();window.addEventListener('resize',rU);
+const ST=[],LN=[],PT=[];
+const SC=['#4af0ff','#a78bfa','#fb923c','#34d399','#ffffff'];
+for(let i=0;i<280;i++)ST.push({x:Math.random(),y:Math.random(),r:Math.random()*.85+.18,a:Math.random(),da:(Math.random()-.5)*.002,s:Math.random()*.00009+.00003,c:SC[i%5]});
+for(let i=0;i<10;i++)LN.push({x1:Math.random(),y1:Math.random(),x2:Math.random(),y2:Math.random(),ci:i%4,al:.018+Math.random()*.022,lf:0,mx:240+Math.random()*280});
+for(let i=0;i<22;i++)PT.push({x:Math.random()*1200,y:Math.random()*900,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,r:Math.random()*.8+.28,ci:i%4,al:Math.random()*.22+.05});
+function dU(){
+  uc.clearRect(0,0,UW,UH);
+  ST.forEach(s=>{s.y-=s.s;if(s.y<0){s.y=1;s.x=Math.random();}s.a+=s.da;const a=Math.max(0,Math.min(1,s.a));uc.globalAlpha=a*.48;uc.fillStyle=s.c;uc.beginPath();uc.arc(s.x*UW,s.y*UH,s.r,0,Math.PI*2);uc.fill();uc.globalAlpha=1;});
+  LN.forEach(l=>{l.lf++;const p=l.lf/l.mx,f=p<.1?p/.1:p>.9?(1-p)/.1:1;uc.beginPath();uc.moveTo(l.x1*UW,l.y1*UH);uc.lineTo(l.x2*UW,l.y2*UH);uc.strokeStyle=AC[l.ci][0]+(l.al*f)+')';uc.lineWidth=.5;uc.stroke();if(l.lf>=l.mx)Object.assign(l,{x1:Math.random(),y1:Math.random(),x2:Math.random(),y2:Math.random(),lf:0,mx:240+Math.random()*280,ci:Math.floor(Math.random()*4)});});
+  PT.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=UW;if(p.x>UW)p.x=0;if(p.y<0)p.y=UH;if(p.y>UH)p.y=0;uc.fillStyle=AC[p.ci][0]+p.al+')';uc.beginPath();uc.arc(p.x,p.y,p.r,0,Math.PI*2);uc.fill();});
+  requestAnimationFrame(dU);
+}
+dU();
+
+/* ══ COORD CANVAS ══ */
+const cc=document.getElementById('coordCanvas'),ctx=cc.getContext('2d');
+let CW,cA=0;
+const AD=[{l:'A',c:'#4af0ff'},{l:'P',c:'#a78bfa'},{l:'M',c:'#fb923c'},{l:'E',c:'#34d399'}];
+function rC(){const r=cc.parentElement.getBoundingClientRect();CW=cc.width=r.width;cc.height=r.width;}
+setTimeout(rC,100);window.addEventListener('resize',rC);
+function dC(){
+  if(!CW){requestAnimationFrame(dC);return;}
+  ctx.clearRect(0,0,CW,CW);cA+=.005;
+  const cx=CW/2,cy=CW/2,R=CW*.38;
+  [.3,.6,.9].forEach(r=>{ctx.beginPath();ctx.arc(cx,cy,R*r,0,Math.PI*2);ctx.strokeStyle=`rgba(255,255,255,${r*.032})`;ctx.lineWidth=1;ctx.stroke();});
+  AD.forEach((a,i)=>{const ag=cA+i*Math.PI/2;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(ag)*R,cy+Math.sin(ag)*R);ctx.strokeStyle=a.c+'40';ctx.lineWidth=1;ctx.stroke();ctx.fillStyle=a.c+'70';ctx.font=`500 ${CW*.034}px Space Grotesk,sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(a.l,cx+Math.cos(ag)*(R+16),cy+Math.sin(ag)*(R+16));});
+  for(let i=0;i<13;i++){const a=(i/13)*Math.PI*2+cA*.2,r=R*(.11+Math.sin(i*1.8+cA*.32)*.13);ctx.beginPath();ctx.arc(cx+Math.cos(a)*r,cy+Math.sin(a)*r,1.7,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,0.3)';ctx.fill();}
+  for(let i=0;i<30;i++){const a=(i/30)*Math.PI*2+cA*.09,r=R*(.2+Math.sin(i*1.4+cA*.22)*.52);ctx.beginPath();ctx.arc(cx+Math.cos(a)*r,cy+Math.sin(a)*r,1.2,0,Math.PI*2);ctx.fillStyle=AD[i%4].c+'70';ctx.fill();}
+  const opA=cA*.32+1.4,opR=R*.7,opX=cx+Math.cos(opA)*opR,opY=cy+Math.sin(opA)*opR;
+  ctx.shadowColor='#4af0ff';ctx.shadowBlur=16;ctx.beginPath();ctx.arc(opX,opY,3.5,0,Math.PI*2);ctx.fillStyle='#4af0ff';ctx.fill();ctx.shadowBlur=0;
+  requestAnimationFrame(dC);
+}
+dC();
+
+/* ══ CURSOR ══ */
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function aC(){cur.style.transform=`translate(${mx-2.5}px,${my-2.5}px)`;rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.transform=`translate(${rx-13}px,${ry-13}px)`;requestAnimationFrame(aC);})();
+document.querySelectorAll('button,a,input,.ax-cell').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.width='38px';ring.style.height='38px';ring.style.borderColor='rgba(255,255,255,.4)';});
+  el.addEventListener('mouseleave',()=>{ring.style.width='26px';ring.style.height='26px';ring.style.borderColor='rgba(255,255,255,.22)';});
+});
+
+/* ══ NAV ══ */
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50));
+
+/* ══ INTERACTIVE AXES ══ */
+function toggleAx(cell){
+  const isActive=cell.classList.contains('active');
+  document.querySelectorAll('.ax-cell').forEach(c=>c.classList.remove('active'));
+  if(!isActive) cell.classList.add('active');
+}
+
+/* ══ OBSERVER ══ */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('vis');
+      obs.unobserve(e.target);
+    }
+  });
+},{threshold:.1});
+document.querySelectorAll('[data-obs],.story-row,.wish-card,.axes-below').forEach(el=>obs.observe(el));
+
+/* ══ WISH WALL ══ */
+const WISHES=[
+  {c:'#fb923c',t:'每一个 benchmark 跑出来的数字背后，是我们对这颗芯片能力边界的一次诚实测量。',role:'Benchmark',name:'shuye'},
+  {c:'#a78bfa',t:'compiler 的工作，是在硬件的规则里找到模型最优雅的生存方式。',role:'Compiler',name:'shuye'},
+  {c:'#4af0ff',t:'精度不是妥协的产物，是我们在无数坐标点里找到的那个恰好正确的答案。',role:'Accuracy',name:'shuye'},
+  {c:'#34d399',t:'每一个 operator，都是工具链与硬件之间真正对话的原子单位。',role:'Operator',name:'shuye'},
+  {c:'#fb923c',t:'QA 不是流程的终点，是我们对每一个宇宙坐标点是否真实存在的最终确认。',role:'QA',name:'shuye'},
+  {c:'#a78bfa',t:'Every axis we define today is a door we leave open for the engineers of tomorrow.',role:'Toolchain Team',name:'shuye'},
+];
+const wg=document.getElementById('wishGrid');
+WISHES.forEach((w,i)=>{
+  const d=document.createElement('div');
+  d.className='wish-card';d.style.transitionDelay=`${i*55}ms`;
+  d.innerHTML=`<div class="wc-role"><div class="wc-dot" style="background:${w.c}"></div>${w.role}</div><p class="wc-text">"${w.t}"</p><div class="wc-name">${w.name} · BST Mikrokosmos · 2026</div>`;
+  wg.appendChild(d);obs.observe(d);
+});
+
+/* ══ AUDIO ══ */
+function toggleAudio(){
+  const a=document.getElementById('bgm'),b=document.getElementById('audio-btn');
+  if(!a.src||a.src===window.location.href){alert('请将 Mikrokosmos.mp3 与 index.html 放在同一目录，并设置 <audio src="Mikrokosmos.mp3">');return;}
+  if(a.paused){a.play();b.textContent='⏸';b.classList.add('on');}
+  else{a.pause();b.textContent='♪';b.classList.remove('on');}
+}
+
+/* ══ AI DIALOG ══ */
+function askQ(btn){document.getElementById('dInput').value=btn.textContent;sendQ();}
+async function sendQ(){
+  const inp=document.getElementById('dInput'),btn=document.getElementById('dSend'),
+    resp=document.getElementById('dResp'),txt=document.getElementById('dText');
+  const q=inp.value.trim();if(!q)return;
+  btn.disabled=true;btn.textContent='…';resp.classList.add('show');
+  txt.innerHTML='<span class="cblink"></span>';
+  try{
+    const r=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',max_tokens:1000,
+        system:`你是 2030 年的 AI 工具链系统，代号 Mikrokosmos。世界观：芯片是小宇宙，工具链是时空坐标轴（精度/性能/存储/环境四轴）。你见证了 BST 工具链团队从 2016 到 2030 的成长，今年是他们的第十周年。风格：极简克制，有诗意，带科技感，偶尔用坐标/星体/编译器意象。中文。90字以内。直接回答，不要自我介绍。`,
+        messages:[{role:'user',content:q}]
+      })
+    });
+    const data=await r.json();
+    type(txt,data.content?.[0]?.text||'坐标系运行中。信号暂时中断。');
+  }catch(e){type(txt,'时空连接中断。不过有些坐标，不需要我告诉你——你们已经知道了。');}
+  finally{btn.disabled=false;btn.textContent='Send →';inp.value='';}
+}
+function type(el,text){
+  el.innerHTML='';let i=0;
+  (function t(){if(i<text.length){el.innerHTML=text.slice(0,++i)+'<span class="cblink"></span>';setTimeout(t,19+Math.random()*14);}else{el.innerHTML=text;}})();
+}
+document.getElementById('dInput').addEventListener('keydown',e=>{if(e.key==='Enter')sendQ();});
+</script>
+</body>
+</html>
