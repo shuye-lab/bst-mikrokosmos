@@ -16,145 +16,185 @@
   --ink-10: rgba(255,255,255,0.10);
   --ink-05: rgba(255,255,255,0.05);
   --border: rgba(255,255,255,0.08);
-  --ax:  #4af0ff;
-  --px:  #a78bfa;
-  --mx:  #fb923c;
-  --ex:  #34d399;
-  --ax5: rgba(74,240,255,0.12);
-  --px5: rgba(167,139,250,0.12);
-  --mx5: rgba(251,146,60,0.12);
-  --ex5: rgba(52,211,153,0.12);
+  --ax: #4af0ff;
+  --px: #a78bfa;
+  --mx: #fb923c;
+  --ex: #34d399;
 }
-
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{
-  background:var(--void);color:var(--ink);
-  font-family:'Inter','Noto Sans SC',sans-serif;
-  overflow-x:hidden;cursor:none;
-  -webkit-font-smoothing:antialiased;
-}
+body{background:var(--void);color:var(--ink);font-family:'Inter','Noto Sans SC',sans-serif;overflow-x:hidden;cursor:none;-webkit-font-smoothing:antialiased;}
 
-/* CURSOR */
-#cur{position:fixed;width:5px;height:5px;background:#fff;border-radius:50%;pointer-events:none;z-index:9999;transition:transform .06s;}
-#cur-ring{position:fixed;width:26px;height:26px;border:1px solid rgba(255,255,255,.22);border-radius:50%;pointer-events:none;z-index:9998;transition:transform .22s ease,width .15s,height .15s,border-color .15s,background .15s;}
+#cur{position:fixed;width:5px;height:5px;background:#fff;border-radius:50%;pointer-events:none;z-index:9999;}
+#cur-ring{position:fixed;width:26px;height:26px;border:1px solid rgba(255,255,255,.22);border-radius:50%;pointer-events:none;z-index:9998;transition:transform .22s ease,width .15s,height .15s,border-color .15s;}
 
-/* CANVAS */
 #universe{position:fixed;inset:0;z-index:0;pointer-events:none;}
 
-/* AUDIO */
-#audio-btn{
-  position:fixed;top:24px;right:24px;z-index:200;
-  width:38px;height:38px;border-radius:50%;
-  background:rgba(255,255,255,.05);border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;transition:all .2s;font-size:13px;color:var(--ink-45);
-  backdrop-filter:blur(16px);
-}
+#audio-btn{position:fixed;top:24px;right:24px;z-index:200;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;font-size:13px;color:var(--ink-45);backdrop-filter:blur(16px);}
 #audio-btn:hover{background:rgba(255,255,255,.1);color:var(--ink);}
 #audio-btn.on{border-color:rgba(74,240,255,.35);color:var(--ax);}
 
-/* NAV */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  padding:18px 52px;display:flex;justify-content:space-between;align-items:center;
-  backdrop-filter:blur(24px);border-bottom:1px solid transparent;
-  transition:border-color .4s,background .4s;
-}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 52px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(24px);border-bottom:1px solid transparent;transition:border-color .4s,background .4s;}
 nav.scrolled{border-bottom-color:var(--border);background:rgba(0,0,5,.55);}
 .nav-logo{font-family:'Space Grotesk',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.14em;color:var(--ink-45);}
 .nav-logo b{color:var(--ink);font-weight:600;}
 .nav-right{font-family:'Space Grotesk',sans-serif;font-size:.58rem;letter-spacing:.22em;color:var(--ink-22);font-weight:300;}
 
-/* LAYOUT */
 section{position:relative;z-index:2;}
 .wrap{max-width:980px;margin:0 auto;padding:0 52px;}
 .wrap-sm{max-width:720px;margin:0 auto;padding:0 52px;}
 
-/* EYEBROW */
-.eyebrow{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:.56rem;font-weight:400;letter-spacing:.32em;
-  text-transform:uppercase;color:var(--ink-22);
-  display:flex;align-items:center;gap:14px;
-}
+.eyebrow{font-family:'Space Grotesk',sans-serif;font-size:.56rem;font-weight:400;letter-spacing:.32em;text-transform:uppercase;color:var(--ink-22);display:flex;align-items:center;gap:14px;}
 .ey-line{flex:0 0 28px;height:1px;background:var(--ink-10);}
-
-/* SECTION TITLE */
 .s-title{font-size:clamp(1.9rem,3.8vw,3rem);font-weight:200;line-height:1.28;letter-spacing:-.028em;margin-top:1.4rem;margin-bottom:1rem;}
 .s-title strong{font-weight:500;display:block;}
 .s-title em{font-style:normal;color:var(--ink-45);font-weight:100;}
 
 /* ══ HERO ══ */
-#hero{
-  min-height:100vh;z-index:2;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:120px 24px 80px;overflow:hidden;
-}
+#hero{min-height:100vh;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 24px 80px;overflow:hidden;}
 
-.hero-anniversary{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:.58rem;letter-spacing:.35em;font-weight:400;
-  color:var(--ink-22);text-transform:uppercase;
-  margin-bottom:2.5rem;
-  animation:fadeUp .9s ease .1s both;
-}
+.hero-eyebrow{font-family:'Space Grotesk',sans-serif;font-size:.58rem;letter-spacing:.32em;font-weight:400;color:var(--ink-22);text-transform:uppercase;margin-bottom:2.8rem;animation:fadeUp .9s ease .1s both;}
 
-.hero-wordmark{line-height:.88;margin-bottom:.7rem;animation:fadeUp .9s ease .25s both;}
-.hw-bst{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:clamp(4rem,11vw,10rem);font-weight:700;
-  letter-spacing:-.03em;color:var(--ink);display:block;
-}
-.hw-micro{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:clamp(1.6rem,5vw,4.5rem);font-weight:300;
-  letter-spacing:.02em;color:var(--ink-22);display:block;
-}
+.hero-wordmark{margin-bottom:2.2rem;animation:fadeUp .9s ease .25s both;}
+.hw-bst{font-family:'Space Grotesk',sans-serif;font-size:clamp(4.5rem,12vw,11rem);font-weight:700;letter-spacing:-.035em;color:var(--ink);display:block;line-height:.88;}
+.hw-micro{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.4rem,4.5vw,4rem);font-weight:300;letter-spacing:.025em;color:var(--ink-22);display:block;line-height:1.1;margin-top:.2rem;}
+.hw-cn{font-family:'Noto Sans SC',sans-serif;font-size:.85rem;font-weight:100;letter-spacing:.65em;color:var(--ink-10);display:block;margin-top:.6rem;}
 
-.hero-cn{
-  font-family:'Noto Sans SC',sans-serif;
-  font-size:clamp(.8rem,1.6vw,1rem);font-weight:100;
-  letter-spacing:.7em;color:var(--ink-22);
-  margin-top:.8rem;margin-bottom:1.6rem;
-  animation:fadeUp .9s ease .38s both;
-}
+.hero-meta{display:flex;align-items:center;gap:1.5rem;justify-content:center;margin-bottom:2.8rem;animation:fadeUp .9s ease .42s both;}
+.hm-divider{width:1px;height:14px;background:var(--ink-10);}
+.hm-item{font-family:'Space Grotesk',sans-serif;font-size:.58rem;letter-spacing:.22em;color:var(--ink-22);font-weight:300;text-transform:uppercase;}
+.hm-item b{color:var(--ink-45);font-weight:500;}
 
-/* 10th badge */
-.tenth-badge{
-  display:inline-flex;align-items:center;gap:10px;
-  border:1px solid rgba(74,240,255,.2);
-  padding:8px 20px;margin-bottom:3rem;
-  animation:fadeUp .9s ease .5s both;
-}
-.tb-num{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:1.5rem;font-weight:700;letter-spacing:-.03em;
-  background:linear-gradient(135deg,var(--ax),var(--px));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.tb-text{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:.58rem;letter-spacing:.2em;font-weight:400;
-  text-transform:uppercase;color:var(--ink-45);line-height:1.5;
-  text-align:left;
-}
-
-.hero-divider{width:1px;height:44px;background:linear-gradient(to bottom,transparent,var(--ink-10),transparent);margin:0 auto 3rem;animation:fadeUp .9s ease .6s both;}
-
-.hero-body{
-  max-width:480px;margin:0 auto;
-  font-size:1rem;font-weight:200;line-height:2.05;color:var(--ink-45);
-  animation:fadeUp .9s ease .72s both;
-}
+.hero-body{max-width:460px;margin:0 auto;font-size:.98rem;font-weight:200;line-height:2.05;color:var(--ink-45);animation:fadeUp .9s ease .56s both;}
 .hero-body strong{font-weight:400;color:var(--ink);}
 
-.scroll-cue{position:absolute;bottom:2.5rem;display:flex;flex-direction:column;align-items:center;gap:8px;animation:fadeUp .9s ease 1.1s both;}
+.scroll-cue{position:absolute;bottom:2.5rem;display:flex;flex-direction:column;align-items:center;gap:8px;animation:fadeUp .9s ease 1s both;}
 .sc-line{width:1px;height:44px;background:linear-gradient(to bottom,var(--ink-10),transparent);}
 .sc-txt{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.3em;color:var(--ink-22);}
 
+/* ══ KNOWLEDGE GRAPH ══ */
+#graph{padding:140px 0;border-top:1px solid var(--border);}
+.graph-top{text-align:center;max-width:560px;margin:0 auto 48px;}
+
+/* Full-bleed canvas stage */
+.graph-stage{
+  position:relative;width:100%;height:700px;
+  overflow:hidden;background:transparent;
+}
+#graphCanvas{width:100%;height:100%;display:block;cursor:grab;}
+
+/* ── Four Galaxy Cards – left overlay ── */
+.galaxy-cards{
+  position:absolute;top:50%;left:max(28px,5%);
+  transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:8px;
+  pointer-events:auto;z-index:4;
+}
+.gc{
+  display:flex;align-items:center;gap:10px;
+  padding:9px 14px;
+  background:rgba(0,0,5,0.55);
+  border:1px solid rgba(255,255,255,0.06);
+  backdrop-filter:blur(12px);
+  transition:border-color .3s, background .3s;
+  cursor:pointer;
+}
+.gc:hover{ background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.14); }
+.gc.active-galaxy{
+  background:rgba(0,0,5,0.78);
+  border-color:var(--gc-color);
+}
+/* All Galaxies card */
+.gc-all{ --gc-color:rgba(255,255,255,0.5); }
+.gc-all .gc-swatch{
+  background:linear-gradient(135deg,#4af0ff,#a78bfa,#fb923c,#34d399);
+  box-shadow:none;
+}
+.gc-all.active-galaxy{ border-color:rgba(255,255,255,0.4); }
+.gc-swatch{
+  width:7px;height:7px;border-radius:50%;flex-shrink:0;
+  box-shadow:0 0 7px var(--gc-color);
+}
+.gc-texts{}
+.gc-en{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:.58rem;font-weight:500;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-45);line-height:1;
+}
+.gc-cn{
+  font-family:'Noto Sans SC',sans-serif;
+  font-size:.5rem;font-weight:100;letter-spacing:.1em;
+  color:var(--ink-22);line-height:1.6;
+}
+.gc-count{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:.48rem;color:var(--ink-10);
+  margin-left:auto;padding-left:8px;
+}
+
+/* ── Detail panel – right ── */
+.graph-panel{
+  position:absolute;top:50%;right:max(0px,3%);
+  transform:translateY(-50%) translateX(16px);
+  width:252px;
+  background:rgba(0,0,5,0.88);
+  border:1px solid var(--border);
+  backdrop-filter:blur(20px);
+  padding:22px 18px 18px;
+  opacity:0;transition:opacity .4s ease,transform .4s ease;
+  pointer-events:none;z-index:5;
+}
+.graph-panel.show{opacity:1;transform:translateY(-50%) translateX(0);pointer-events:auto;}
+/* canvas area inset so cards/panel don't overlap content */
+#graphCanvas{width:100%;height:100%;display:block;cursor:grab;}
+
+.gp-close{
+  position:absolute;top:10px;right:12px;
+  font-family:'Space Grotesk',sans-serif;font-size:.48rem;letter-spacing:.15em;
+  color:var(--ink-22);cursor:pointer;text-transform:uppercase;pointer-events:auto;
+}
+.gp-close:hover{color:var(--ink-45);}
+.gp-tag{font-family:'Space Grotesk',sans-serif;font-size:.48rem;letter-spacing:.26em;font-weight:400;text-transform:uppercase;margin-bottom:.55rem;display:flex;align-items:center;gap:7px;}
+.gp-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+.gp-name{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:600;letter-spacing:-.02em;line-height:1.15;margin-bottom:.18rem;}
+.gp-cn{font-family:'Noto Sans SC',sans-serif;font-size:.6rem;font-weight:100;letter-spacing:.16em;color:var(--ink-22);margin-bottom:.9rem;}
+.gp-body{font-size:.74rem;font-weight:200;line-height:1.95;color:var(--ink-45);margin-bottom:.9rem;}
+.gp-body strong{font-weight:400;color:var(--ink-70);}
+.gp-divider{height:1px;background:var(--border);margin-bottom:.7rem;}
+.gp-sub-title{font-family:'Space Grotesk',sans-serif;font-size:.44rem;letter-spacing:.22em;color:var(--ink-22);text-transform:uppercase;margin-bottom:.5rem;}
+.gp-sub{display:flex;flex-direction:column;}
+.gp-sub-item{font-family:'Space Grotesk',sans-serif;font-size:.6rem;letter-spacing:.04em;color:var(--ink-22);display:flex;align-items:center;gap:7px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);}
+.gp-sub-item:last-child{border-bottom:none;}
+.gp-sub-dot{width:3px;height:3px;border-radius:50%;flex-shrink:0;}
+
+.graph-hint{
+  position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
+  font-family:'Space Grotesk',sans-serif;font-size:.46rem;
+  letter-spacing:.2em;color:var(--ink-10);text-transform:uppercase;
+  white-space:nowrap;pointer-events:none;
+}
+
+@media(max-width:768px){
+  .graph-stage{height:560px;}
+  .galaxy-cards{left:12px;gap:6px;}
+  .gc{padding:7px 10px;}
+  .graph-panel{display:none;}
+  /* mobile panel slides up */
+  #gpMobile{
+    position:absolute;bottom:0;left:0;right:0;
+    background:rgba(0,0,5,.92);
+    border-top:1px solid var(--border);
+    backdrop-filter:blur(20px);
+    padding:18px 20px 24px;
+    transform:translateY(100%);
+    transition:transform .4s ease;
+    z-index:10;max-height:52%;overflow-y:auto;
+  }
+  #gpMobile.show{transform:translateY(0);}
+}
+
 /* ══ MANIFESTO ══ */
-#manifesto{padding:160px 0;}
+#manifesto{padding:160px 0;border-top:1px solid var(--border);}
 .mani-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
 .mani-l{opacity:0;transform:translateY(28px);transition:opacity .9s,transform .9s;}
 .mani-l.vis{opacity:1;transform:translateY(0);}
@@ -167,159 +207,26 @@ section{position:relative;z-index:2;}
 .mani-body strong{font-weight:400;color:var(--ink-70);}
 .mani-quote{border-left:1px solid var(--ink-10);padding-left:1.5rem;font-size:.84rem;font-weight:200;line-height:2.05;color:var(--ink-22);font-style:italic;}
 
-/* ══ INTERACTIVE AXES ══ */
-#axes{padding:160px 0;border-top:1px solid var(--border);}
-
-.axes-top{text-align:center;max-width:560px;margin:0 auto 80px;}
-.axes-top .s-title{margin-top:1.4rem;}
-
-/* The interactive stage */
-.axes-stage{
-  display:grid;grid-template-columns:1fr 1fr;gap:1px;
-  background:var(--border);border:1px solid var(--border);
-}
-
-.ax-cell{
-  position:relative;background:var(--void);
-  padding:0;overflow:hidden;
-  cursor:pointer;
-  transition:background .35s;
-  min-height:220px;
-}
-.ax-cell:hover,.ax-cell.active{background:#060810;}
-
-/* Resting state — just the axis label */
-.ax-rest{
-  position:absolute;inset:0;
-  display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;
-  padding:36px 40px;
-  transition:opacity .35s,transform .35s;
-  pointer-events:none;
-}
-.ax-cell.active .ax-rest{opacity:0;transform:translateY(-8px);}
-
-.ax-rest-num{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:5rem;font-weight:700;letter-spacing:-.04em;line-height:1;
-  color:var(--ink-05);position:absolute;right:24px;top:18px;
-  transition:color .35s;
-}
-.ax-cell:hover .ax-rest-num{color:var(--ink-10);}
-
-.ax-rest-label{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:.56rem;letter-spacing:.28em;font-weight:400;
-  text-transform:uppercase;margin-bottom:.5rem;
-  display:flex;align-items:center;gap:8px;
-}
-.ax-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
-
-.ax-rest-en{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:2rem;font-weight:600;letter-spacing:-.02em;line-height:1;margin-bottom:.2rem;
-}
-.ax-rest-cn{
-  font-family:'Noto Sans SC',sans-serif;
-  font-size:.65rem;font-weight:100;letter-spacing:.2em;color:var(--ink-22);
-}
-
-/* Hover hint */
-.ax-hint{
-  position:absolute;top:32px;right:32px;
-  font-family:'Space Grotesk',sans-serif;font-size:.52rem;
-  letter-spacing:.18em;color:var(--ink-22);
-  transition:opacity .3s;
-}
-.ax-cell.active .ax-hint{opacity:0;}
-
-/* Expanded state */
-.ax-expand{
-  position:absolute;inset:0;padding:36px 40px;
-  display:flex;flex-direction:column;justify-content:space-between;
-  opacity:0;transform:translateY(10px);
-  transition:opacity .35s,transform .35s;
-  pointer-events:none;
-}
-.ax-cell.active .ax-expand{opacity:1;transform:translateY(0);pointer-events:auto;}
-
-.ax-exp-tag{
-  font-family:'Space Grotesk',sans-serif;font-size:.52rem;letter-spacing:.28em;
-  font-weight:400;text-transform:uppercase;
-  display:flex;align-items:center;gap:8px;
-}
-.ax-exp-title{font-size:1.1rem;font-weight:500;letter-spacing:-.01em;margin:.5rem 0 .6rem;line-height:1.3;}
-.ax-exp-body{font-size:.78rem;font-weight:200;line-height:2;color:var(--ink-45);flex:1;}
-.ax-exp-body strong{font-weight:400;color:var(--ink-70);}
-
-/* Progress bar at bottom */
-.ax-exp-bar{height:1px;background:var(--border);position:relative;overflow:hidden;margin-top:1.5rem;}
-.ax-exp-fill{position:absolute;inset-y:0;left:0;width:0;transition:width 1.2s cubic-bezier(.16,1,.3,1) .2s;}
-.ax-cell.active .ax-exp-fill{width:var(--fill-w);}
-
-/* Close hint */
-.ax-close{
-  position:absolute;top:28px;right:28px;
-  font-family:'Space Grotesk',sans-serif;font-size:.5rem;
-  letter-spacing:.18em;color:var(--ink-22);
-  opacity:0;transition:opacity .3s .2s;
-}
-.ax-cell.active .ax-close{opacity:1;}
-
-/* Below axes — selection concept */
-.axes-below{
-  margin-top:64px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;
-  opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s;
-}
-.axes-below.vis{opacity:1;transform:translateY(0);}
-
-.ab-left{}
-.ab-label{font-family:'Space Grotesk',sans-serif;font-size:.55rem;letter-spacing:.28em;color:var(--ink-22);margin-bottom:1.2rem;text-transform:uppercase;}
-.ab-headline{font-size:clamp(1.4rem,2.8vw,2.2rem);font-weight:200;line-height:1.35;letter-spacing:-.02em;margin-bottom:1.2rem;}
-.ab-headline strong{font-weight:500;}
-.ab-body{font-size:.84rem;font-weight:200;line-height:2.1;color:var(--ink-45);}
-.ab-body strong{font-weight:400;color:var(--ink-70);}
-
-.ab-right{display:flex;flex-direction:column;gap:10px;}
-.ab-point{
-  border:1px solid var(--border);padding:14px 18px;
-  font-size:.78rem;font-weight:200;line-height:1.7;color:var(--ink-45);
-  display:flex;gap:12px;align-items:flex-start;
-  transition:border-color .2s,background .2s;
-}
-.ab-point:hover{border-color:rgba(255,255,255,.16);background:var(--ink-05);}
-.ab-arrow{color:var(--ink-22);font-size:.6rem;margin-top:.15rem;flex-shrink:0;font-family:'Space Grotesk',sans-serif;}
-.ab-point strong{font-weight:400;color:var(--ink-70);}
-
-/* ══ EXPAND SECTION ══ */
+/* ══ EXPAND ══ */
 #expand{padding:160px 0;border-top:1px solid var(--border);}
 .exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:120px;align-items:center;}
-.exp-left{opacity:0;transform:translateX(-24px);transition:opacity .9s,transform .9s;}
-.exp-left.vis{opacity:1;transform:translateX(0);}
+.exp-l{opacity:0;transform:translateX(-24px);transition:opacity .9s,transform .9s;}
+.exp-l.vis{opacity:1;transform:translateX(0);}
 .exp-kicker{margin-bottom:1.5rem;}
 .exp-h{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:200;line-height:1.3;letter-spacing:-.025em;margin-bottom:1.5rem;}
 .exp-h strong{font-weight:500;display:block;}
 .exp-p{font-size:.86rem;font-weight:200;line-height:2.2;color:var(--ink-45);margin-bottom:1rem;}
 .exp-p strong{font-weight:400;color:var(--ink-70);}
-.exp-pill{
-  display:inline-flex;align-items:center;gap:8px;
-  border:1px solid var(--border);padding:8px 16px;margin-top:.5rem;
-  font-family:'Space Grotesk',sans-serif;font-size:.58rem;
-  letter-spacing:.16em;font-weight:400;text-transform:uppercase;color:var(--ink-22);
-}
-.exp-right{opacity:0;transform:translateX(24px);transition:opacity .9s .14s,transform .9s .14s;}
-.exp-right.vis{opacity:1;transform:translateX(0);}
-#coordCanvas{width:100%;aspect-ratio:1;display:block;max-width:340px;margin:0 auto;}
+.exp-pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);padding:8px 16px;margin-top:.5rem;font-family:'Space Grotesk',sans-serif;font-size:.58rem;letter-spacing:.16em;font-weight:400;text-transform:uppercase;color:var(--ink-22);}
+.exp-r{opacity:0;transform:translateX(24px);transition:opacity .9s .14s,transform .9s .14s;}
+.exp-r.vis{opacity:1;transform:translateX(0);}
+#coordCanvas{width:100%;aspect-ratio:1;display:block;max-width:320px;margin:0 auto;}
 
 /* ══ STORY ══ */
 #story{padding:160px 0;border-top:1px solid var(--border);}
 .story-intro{text-align:center;max-width:520px;margin:0 auto 80px;}
 .story-rows{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);}
-.story-row{
-  background:var(--void);padding:52px 56px;
-  display:grid;grid-template-columns:96px 1fr;gap:56px;align-items:start;
-  opacity:0;transform:translateY(18px);
-  transition:opacity .7s,transform .7s,background .25s;
-}
+.story-row{background:var(--void);padding:52px 56px;display:grid;grid-template-columns:96px 1fr;gap:56px;align-items:start;opacity:0;transform:translateY(18px);transition:opacity .7s,transform .7s,background .25s;}
 .story-row.vis{opacity:1;transform:translateY(0);}
 .story-row:hover{background:#07070f;}
 .sr-time{font-family:'Space Grotesk',sans-serif;font-size:.52rem;letter-spacing:.16em;font-weight:400;text-transform:uppercase;color:var(--ink-22);line-height:1.7;padding-top:.1rem;}
@@ -328,13 +235,8 @@ section{position:relative;z-index:2;}
 .sr-title em{font-style:normal;color:var(--ink-22);font-weight:200;}
 .sr-body{font-size:.82rem;font-weight:200;line-height:2.2;color:var(--ink-22);margin-bottom:1rem;}
 .sr-body strong{font-weight:400;color:var(--ink-45);}
-.sr-code{
-  background:rgba(255,255,255,.022);border:1px solid var(--border);
-  border-left:1px solid rgba(74,240,255,.15);
-  padding:14px 18px;font-family:'Space Grotesk',monospace;
-  font-size:.67rem;line-height:2;color:var(--ink-22);
-}
-.ca{color:var(--ax);} .cp{color:var(--px);} .cg{color:#4ade80;} .co{color:var(--mx);}
+.sr-code{background:rgba(255,255,255,.022);border:1px solid var(--border);border-left:1px solid rgba(74,240,255,.15);padding:14px 18px;font-family:'Space Grotesk',monospace;font-size:.67rem;line-height:2;color:var(--ink-22);}
+.ca{color:var(--ax);}.cp{color:var(--px);}.cg{color:#4ade80;}.co{color:var(--mx);}
 
 /* ══ DIALOG ══ */
 #dialog{padding:160px 0;border-top:1px solid var(--border);}
@@ -342,8 +244,7 @@ section{position:relative;z-index:2;}
 .dlg-shell{border:1px solid var(--border);background:rgba(255,255,255,.016);backdrop-filter:blur(20px);}
 .dlg-bar{padding:13px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;font-family:'Space Grotesk',sans-serif;font-size:.58rem;letter-spacing:.14em;color:var(--ink-22);}
 .dd{width:7px;height:7px;border-radius:50%;}
-.dd-g{background:#34d399;}
-.dd-p{background:var(--ax);animation:pulse 2s ease-in-out infinite;}
+.dd-g{background:#34d399;}.dd-p{background:var(--ax);animation:pulse 2s ease-in-out infinite;}
 .dlg-body{padding:28px;}
 .sys-row{border:1px solid var(--border);border-left:1px solid rgba(74,240,255,.15);padding:13px 16px;font-size:.78rem;font-weight:200;line-height:2;color:var(--ink-22);margin-bottom:16px;display:flex;gap:10px;align-items:flex-start;}
 .sys-chip{font-family:'Space Grotesk',sans-serif;font-size:.48rem;letter-spacing:.14em;border:1px solid rgba(74,240,255,.18);color:var(--ax);padding:2px 6px;flex-shrink:0;margin-top:2px;font-weight:400;}
@@ -366,11 +267,7 @@ section{position:relative;z-index:2;}
 #wishes{padding:160px 0;border-top:1px solid var(--border);}
 .wishes-top{text-align:center;margin-bottom:80px;}
 .wish-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);}
-.wish-card{
-  background:var(--void);padding:44px 34px;
-  opacity:0;transform:translateY(16px);
-  transition:opacity .6s,transform .6s,background .25s;
-}
+.wish-card{background:var(--void);padding:44px 34px;opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s,background .25s;}
 .wish-card.vis{opacity:1;transform:translateY(0);}
 .wish-card:hover{background:#07070f;}
 .wc-role{font-family:'Space Grotesk',sans-serif;font-size:.52rem;letter-spacing:.24em;font-weight:400;text-transform:uppercase;margin-bottom:1.75rem;display:flex;align-items:center;gap:8px;color:var(--ink-22);}
@@ -378,12 +275,10 @@ section{position:relative;z-index:2;}
 .wc-text{font-size:.85rem;font-weight:200;line-height:2.05;color:var(--ink-45);font-style:italic;margin-bottom:1.5rem;}
 .wc-name{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.2em;font-weight:400;color:var(--ink-22);text-transform:uppercase;}
 
-/* ══ FOOTER ══ */
 footer{position:relative;z-index:2;padding:80px 52px;border-top:1px solid var(--border);text-align:center;}
 .ft-logo{font-family:'Space Grotesk',sans-serif;font-size:.6rem;letter-spacing:.32em;font-weight:500;text-transform:uppercase;color:var(--ink-22);margin-bottom:.6rem;}
 .ft-sub{font-size:.55rem;font-weight:200;letter-spacing:.18em;color:var(--ink-10);font-family:'Space Grotesk',sans-serif;}
 
-/* ANIMATIONS */
 @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(74,240,255,.4)}50%{box-shadow:0 0 0 5px rgba(74,240,255,0)}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
@@ -393,12 +288,165 @@ footer{position:relative;z-index:2;padding:80px 52px;border-top:1px solid var(--
   .wrap,.wrap-sm{padding:0 24px;}
   nav{padding:18px 24px;}
   .mani-grid,.exp-grid{grid-template-columns:1fr;gap:48px;}
-  .axes-stage{grid-template-columns:1fr;}
-  .axes-below{grid-template-columns:1fr;}
   .story-row{grid-template-columns:1fr;gap:12px;padding:36px 24px;}
   .wish-grid{grid-template-columns:1fr;}
-  .exp-right{display:none;}
+  .exp-r{display:none;}
+  .graph-panel{display:none;}
 }
+
+/* Hero tagline */
+
+.hero-grad-tagline{
+  background:linear-gradient(90deg, var(--ink) 0%, var(--ax) 55%, var(--px) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero-tagline{
+  font-family:'Noto Sans SC',sans-serif;
+  font-size:clamp(.9rem,2vw,1.2rem);
+  font-weight:200;
+  letter-spacing:.28em;
+  color:var(--ink-45);
+  margin-bottom:2rem;
+  animation:fadeUp .9s ease .38s both;
+}
+
+/* Gradient keyword spans — used sparingly in hero body */
+.hero-grad-a{
+  font-weight:400;
+  background:linear-gradient(90deg,var(--ax),var(--px));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero-grad-b{
+  font-weight:400;
+  background:linear-gradient(90deg,var(--px),var(--mx));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+/* Gradient on manifesto strong — one word only */
+.mani-headline strong{
+  background:linear-gradient(90deg,var(--ink) 0%,var(--ax) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  font-weight:500;display:block;
+}
+.mob-nav{
+  display:none;
+}
+@media(max-width:768px){
+  .mob-nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:24px 24px 8px;
+    margin-top:8px;
+  }
+  .mob-nav-btn{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:.5rem;font-weight:400;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--ink-22);
+    background:transparent;border:1px solid var(--border);
+    padding:8px 12px;cursor:pointer;
+    transition:color .2s,border-color .2s;
+    text-decoration:none;display:inline-flex;align-items:center;gap:5px;
+    white-space:nowrap;flex-shrink:0;
+  }
+  .mob-nav-btn:hover,
+  .mob-nav-btn:active{ color:var(--ink-45);border-color:rgba(255,255,255,.18); }
+  .mob-nav-btn.hidden{ visibility:hidden;pointer-events:none;flex-shrink:0; }
+  .mob-nav-label{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:.4rem;letter-spacing:.18em;
+    color:var(--ink-10);text-transform:uppercase;
+    flex:1;text-align:center;min-width:0;overflow:hidden;
+  }
+  /* extra-small phones */
+  @media(max-width:390px){
+    .mob-nav-btn{ font-size:.44rem;padding:7px 9px;letter-spacing:.1em; }
+    .mob-nav-label{ display:none; }
+  }
+}
+
+/* ══ TRANSITION ELEMENTS ══ */
+
+/* Shared canvas for transition elements */
+.tx-wrap{
+  position:relative;
+  height:120px;
+  overflow:visible;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+  z-index:2;
+}
+.tx-wrap canvas{
+  position:absolute;
+  width:100%;
+  height:100%;
+  display:block;
+}
+
+/* ── Spacecraft (hero→graph) ── */
+#tx-craft-wrap{ height:90px; }
+
+/* ── Satellite (graph→manifesto) ── */
+#tx-sat-wrap{ height:100px; }
+
+/* ── Beacon (manifesto→expand) ── */
+#tx-beacon-wrap{ height:100px; }
+
+/* ── Portal/Stargate (expand→story) ── */
+#tx-portal-wrap{ height:120px; }
+
+/* ── Signal (story→dialog) ── */
+#tx-signal-wrap{ height:90px; }
+
+/* ── Drift (dialog→wishes) ── */
+#tx-drift-wrap{ height:80px; }
+
+/* ══ GRADIENT KEYWORD CLASSES ══ */
+.gk-ax{
+  font-weight:400;
+  background:linear-gradient(90deg,#4af0ff,#7dd8ff);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.gk-px{
+  font-weight:400;
+  background:linear-gradient(90deg,#a78bfa,#c4a8ff);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.gk-mx{
+  font-weight:400;
+  background:linear-gradient(90deg,#fb923c,#fdc07a);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.gk-ex{
+  font-weight:400;
+  background:linear-gradient(90deg,#34d399,#6ee7b7);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.gk-white{
+  font-weight:400;
+  background:linear-gradient(90deg,rgba(255,255,255,.95),rgba(255,255,255,.6));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.gk-multi{
+  font-weight:500;
+  background:linear-gradient(90deg,#4af0ff 0%,#a78bfa 50%,#fb923c 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+/* section accent borders — very subtle color tint per chapter */
+#manifesto{ border-top-color:rgba(74,240,255,0.12); }
+#expand{    border-top-color:rgba(167,139,250,0.12); }
+#story{     border-top-color:rgba(251,146,60,0.12); }
+#dialog{    border-top-color:rgba(52,211,153,0.12); }
+#wishes{    border-top-color:rgba(74,240,255,0.08); }
+
+/* ══ TRANSITION CANVAS KEYFRAMES ══ */
+@keyframes txFadeIn{ from{opacity:0}to{opacity:1} }
 </style>
 </head>
 <body>
@@ -416,32 +464,134 @@ footer{position:relative;z-index:2;padding:80px 52px;border-top:1px solid var(--
 
 <!-- ══ HERO ══ -->
 <section id="hero">
-  <div class="hero-anniversary">BST Toolchain Team · Since 2016</div>
-
+  <div class="hero-eyebrow">BST Toolchain Team · Since 2016</div>
   <div class="hero-wordmark">
     <span class="hw-bst">BST</span>
     <span class="hw-micro">Mikrokosmos</span>
+    <span class="hw-cn">芯 · 宇 · 宙</span>
   </div>
-  <div class="hero-cn">芯 · 宇 · 宙</div>
-
-  <div class="tenth-badge">
-    <span class="tb-num">10th</span>
-    <span class="tb-text">Anniversary<br>2026</span>
+  <div class="hero-tagline"><span class="hero-grad-tagline">为你再造一个芯宇宙</span></div>
+  <div class="hero-meta">
+    <div class="hm-item"><b>10th</b> Anniversary</div>
+    <div class="hm-divider"></div>
+    <div class="hm-item">2016 – <b>2026</b></div>
+    <div class="hm-divider"></div>
+    <div class="hm-item">Toolchain Team</div>
   </div>
-
-  <div class="hero-divider"></div>
-
   <p class="hero-body">
     芯片是一个小宇宙。<br>
-    工具链，是这个宇宙的<strong>时空坐标轴</strong>。<br>
-    每一个目标的微小偏移，都通向<strong>一个全然不同的未来</strong>。
+    每颗<span class="hero-grad-a">星球</span>是一个独立的优化维度，<br>
+    我们的工作，是在客户的 DDL 内<span class="hero-grad-b">不断逼近更优解</span>。
   </p>
-
   <div class="scroll-cue">
     <div class="sc-line"></div>
     <div class="sc-txt">Scroll</div>
   </div>
+
+  <div class="mob-nav" style="margin-top:2.5rem"><span class="mob-nav-btn hidden">← Back</span><span class="mob-nav-label">HERO</span><button class="mob-nav-btn" onclick="document.getElementById('graph').scrollIntoView({behavior:'smooth'})">The Map →</button></div>
 </section>
+
+<!-- TX: Spacecraft -->
+<div class="tx-wrap" id="tx-craft-wrap"><canvas id="txCraft"></canvas></div>
+
+<!-- ══ KNOWLEDGE GRAPH ══ -->
+<section id="graph">
+  <div class="wrap">
+    <div class="graph-top" data-obs>
+      <div class="eyebrow" style="justify-content:center"><div class="ey-line"></div>The Coordinate System · <span class="gk-ax">时空坐标轴</span><div class="ey-line"></div></div>
+      <h2 class="s-title" style="text-align:center">
+        <em>从芯片出发</em>
+        <strong><span class="gk-multi">工具链</span>定义了可能性的边界</strong>
+      </h2>
+      <p style="font-family:'Space Grotesk',sans-serif;font-size:.58rem;letter-spacing:.2em;color:var(--ink-22);text-transform:uppercase;margin-top:1.2rem;">
+        ↓ &nbsp;Click a star or galaxy card to explore
+      </p>
+    </div>
+  </div>
+
+  <div class="graph-stage" id="graphStage">
+    <canvas id="graphCanvas"></canvas>
+
+    <!-- Galaxy cards (left) -->
+    <div class="galaxy-cards" id="galaxyCards">
+      <div class="gc gc-all" id="gc-all" style="--gc-color:rgba(255,255,255,0.4)" onclick="selectGalaxy('all')">
+        <div class="gc-swatch"></div>
+        <div class="gc-texts">
+          <div class="gc-en">All Galaxies</div>
+          <div class="gc-cn">全部星系</div>
+        </div>
+        <div class="gc-count">×32</div>
+      </div>
+      <div class="gc" id="gc-0" style="--gc-color:#4af0ff" onclick="selectGalaxy(0)">
+        <div class="gc-swatch" style="background:#4af0ff"></div>
+        <div class="gc-texts">
+          <div class="gc-en">Accuracy</div>
+          <div class="gc-cn">精度轴</div>
+        </div>
+        <div class="gc-count">×8</div>
+      </div>
+      <div class="gc" id="gc-1" style="--gc-color:#a78bfa" onclick="selectGalaxy(1)">
+        <div class="gc-swatch" style="background:#a78bfa"></div>
+        <div class="gc-texts">
+          <div class="gc-en">Performance</div>
+          <div class="gc-cn">性能轴</div>
+        </div>
+        <div class="gc-count">×8</div>
+      </div>
+      <div class="gc" id="gc-2" style="--gc-color:#fb923c" onclick="selectGalaxy(2)">
+        <div class="gc-swatch" style="background:#fb923c"></div>
+        <div class="gc-texts">
+          <div class="gc-en">Memory</div>
+          <div class="gc-cn">存储轴</div>
+        </div>
+        <div class="gc-count">×8</div>
+      </div>
+      <div class="gc" id="gc-3" style="--gc-color:#34d399" onclick="selectGalaxy(3)">
+        <div class="gc-swatch" style="background:#34d399"></div>
+        <div class="gc-texts">
+          <div class="gc-en">Environment</div>
+          <div class="gc-cn">环境轴</div>
+        </div>
+        <div class="gc-count">×8</div>
+      </div>
+    </div>
+
+    <!-- Desktop detail panel (right) -->
+    <div class="graph-panel" id="graphPanel">
+      <div class="gp-close" onclick="closePanel()">× Close</div>
+      <div class="gp-tag"><div class="gp-dot" id="gpDot"></div><span id="gpCat"></span></div>
+      <div class="gp-name" id="gpName"></div>
+      <div class="gp-cn"   id="gpCn"></div>
+      <p  class="gp-body"  id="gpBody"></p>
+      <div class="gp-divider"></div>
+      <div class="gp-sub-title" id="gpSubTitle">Galaxy · 同轴星点</div>
+      <div class="gp-sub" id="gpSub"></div>
+    </div>
+
+    <!-- Mobile panel (bottom sheet) -->
+    <div id="gpMobile">
+      <div class="gp-close" onclick="closeMobilePanel()" style="position:static;display:flex;justify-content:flex-end;margin-bottom:10px;">× Close</div>
+      <div class="gp-tag"><div class="gp-dot" id="gpDotM"></div><span id="gpCatM"></span></div>
+      <div class="gp-name" id="gpNameM"></div>
+      <div class="gp-cn"   id="gpCnM"></div>
+      <p  class="gp-body"  id="gpBodyM"></p>
+    </div>
+
+    <div class="graph-hint" id="graphHint">Drag to rotate · Click a star to explore</div>
+  </div>
+
+  <!-- After hint -->
+  <div style="text-align:center;padding:28px 24px 0;">
+    <p style="font-family:'Space Grotesk',sans-serif;font-size:.52rem;letter-spacing:.22em;color:var(--ink-10);text-transform:uppercase;">
+      32 coordinate nodes · 4 axes · click any star to explore its dimension
+    </p>
+  </div>
+
+  <div class="mob-nav"><button class="mob-nav-btn" onclick="document.getElementById('hero').scrollIntoView({behavior:'smooth'})">← Back</button><span class="mob-nav-label">GRAPH</span><button class="mob-nav-btn" onclick="document.getElementById('manifesto').scrollIntoView({behavior:'smooth'})">Manifesto →</button></div>
+</section>
+
+<!-- TX: Satellite -->
+<div class="tx-wrap" id="tx-sat-wrap"><canvas id="txSat"></canvas></div>
 
 <!-- ══ MANIFESTO ══ -->
 <section id="manifesto">
@@ -449,242 +599,104 @@ footer{position:relative;z-index:2;padding:80px 52px;border-top:1px solid var(--
     <div class="mani-grid">
       <div class="mani-l" data-obs>
         <div class="eyebrow"><div class="ey-line"></div>Manifesto · 宣言</div>
-        <h2 class="mani-headline">
-          <em>每一次选择</em>
-          <strong>都是一次宇宙跃迁</strong>
-        </h2>
+        <h2 class="mani-headline"><em>没有真正的全局最优解</em><strong>只有不断逼近的过程</strong></h2>
       </div>
       <div class="mani-r" data-obs>
-        <p class="mani-body">在精度、性能、存储、环境四条坐标轴张开的超大相空间里，目标参数的一点点偏移，就意味着通向<strong>截然不同的多元宇宙坐标点</strong>。</p>
-        <p class="mani-body">工程师能探索的时空是有限的。但当<strong>人类的直觉</strong>与<strong>AI 的算力</strong>结合，探索半径成倍扩展——让客户模型自适应达到最好的效果。</p>
-        <div class="mani-quote">工程师把目光聚焦于世界观的构建，<br>把 dirty work 留给工具链。</div>
+        <p class="mani-body">Accuracy、Performance、Memory、Environment——这是四个相互博弈的 <strong><span class="gk-multi">Galaxy</span></strong>。每颗星球都是一个独立的优化维度，彼此之间存在无法消除的张力。</p>
+        <p class="mani-body">真正的优化空间是<strong><span class="gk-ax">高维的</span>、<span class="gk-px">多目标的</span></strong>。在客户的 DDL 到来之前，工程师能遍历的解只是其中极小的一个切片。全局最优从来不是终点——它是一个方向。</p>
+        <div class="mani-quote">工程实践的本质，<br>是在有限时间内找到<span class="gk-ax">当下最好的那个解</span>，<br>然后在下一次迭代里，再近一点。</div>
       </div>
     </div>
   </div>
+
+  <div class="mob-nav"><button class="mob-nav-btn" onclick="document.getElementById('graph').scrollIntoView({behavior:'smooth'})">← Back</button><span class="mob-nav-label">MANIFESTO</span><button class="mob-nav-btn" onclick="document.getElementById('expand').scrollIntoView({behavior:'smooth'})">Human × AI →</button></div>
 </section>
 
-<!-- ══ INTERACTIVE AXES ══ -->
-<section id="axes">
-  <div class="wrap">
-    <div class="axes-top" data-obs>
-      <div class="eyebrow" style="justify-content:center"><div class="ey-line"></div>The Coordinate System · 时空坐标轴<div class="ey-line"></div></div>
-      <h2 class="s-title" style="text-align:center">
-        <em>工具链的维度</em>
-        <strong>定义了可能性的边界</strong>
-      </h2>
-      <p style="font-size:.82rem;font-weight:200;line-height:2;color:var(--ink-22);margin-top:.5rem">点击任意坐标轴，展开这个维度的世界观</p>
-    </div>
-
-    <!-- Interactive grid -->
-    <div class="axes-stage" id="axesStage">
-
-      <div class="ax-cell" data-ax="0" onclick="toggleAx(this)">
-        <div class="ax-rest">
-          <div class="ax-rest-num">01</div>
-          <div class="ax-rest-label"><div class="ax-dot" style="background:var(--ax)"></div><span style="color:var(--ax)">Accuracy</span></div>
-          <div class="ax-rest-en" style="color:var(--ax)">精度轴</div>
-          <div class="ax-rest-cn">Model Accuracy</div>
-        </div>
-        <div class="ax-hint">Click to explore →</div>
-        <div class="ax-close">× Close</div>
-        <div class="ax-expand">
-          <div>
-            <div class="ax-exp-tag"><div class="ax-dot" style="background:var(--ax)"></div><span style="color:var(--ax);font-family:'Space Grotesk',sans-serif;font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;">Accuracy · 精度</span></div>
-            <div class="ax-exp-title">每一个 bit，都是一次选择</div>
-            <p class="ax-exp-body">量化方案、算子精度、数值稳定性——精度轴上的每个刻度，决定了<strong>客户模型能走多远</strong>。掉精度不是失败，是没找到正确的坐标点。工具链的职责是把搜索空间从无限压缩到可解。</p>
-          </div>
-          <div>
-            <div class="ax-exp-bar"><div class="ax-exp-fill" style="background:var(--ax);--fill-w:88%"></div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="ax-cell" data-ax="1" onclick="toggleAx(this)">
-        <div class="ax-rest">
-          <div class="ax-rest-num">02</div>
-          <div class="ax-rest-label"><div class="ax-dot" style="background:var(--px)"></div><span style="color:var(--px)">Performance</span></div>
-          <div class="ax-rest-en" style="color:var(--px)">性能轴</div>
-          <div class="ax-rest-cn">Throughput &amp; Latency</div>
-        </div>
-        <div class="ax-hint">Click to explore →</div>
-        <div class="ax-close">× Close</div>
-        <div class="ax-expand">
-          <div>
-            <div class="ax-exp-tag"><div class="ax-dot" style="background:var(--px)"></div><span style="color:var(--px);font-family:'Space Grotesk',sans-serif;font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;">Performance · 性能</span></div>
-            <div class="ax-exp-title">算力不是极限，是起点</div>
-            <p class="ax-exp-body">吞吐量、时延、利用率——<strong>瓶颈永远藏在你以为没问题的地方</strong>。benchmark 是这条轴上的眼睛，compiler 是改变轨迹的手。工具链让算力真正跑满，而不是在等待中消耗。</p>
-          </div>
-          <div>
-            <div class="ax-exp-bar"><div class="ax-exp-fill" style="background:var(--px);--fill-w:94%"></div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="ax-cell" data-ax="2" onclick="toggleAx(this)">
-        <div class="ax-rest">
-          <div class="ax-rest-num">03</div>
-          <div class="ax-rest-label"><div class="ax-dot" style="background:var(--mx)"></div><span style="color:var(--mx)">Memory</span></div>
-          <div class="ax-rest-en" style="color:var(--mx)">存储轴</div>
-          <div class="ax-rest-cn">Memory &amp; Bandwidth</div>
-        </div>
-        <div class="ax-hint">Click to explore →</div>
-        <div class="ax-close">× Close</div>
-        <div class="ax-expand">
-          <div>
-            <div class="ax-exp-tag"><div class="ax-dot" style="background:var(--mx)"></div><span style="color:var(--mx);font-family:'Space Grotesk',sans-serif;font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;">Memory · 存储</span></div>
-            <div class="ax-exp-title">在有限的硅上，编排无限的可能</div>
-            <p class="ax-exp-body">片上内存、带宽墙、缓存策略——存储不够不是模型的问题，是<strong>编排方式的问题</strong>。operator 的调度顺序决定了数据流的命运。工具链重新排列时空，让模型在边界内完整运行。</p>
-          </div>
-          <div>
-            <div class="ax-exp-bar"><div class="ax-exp-fill" style="background:var(--mx);--fill-w:78%"></div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="ax-cell" data-ax="3" onclick="toggleAx(this)">
-        <div class="ax-rest">
-          <div class="ax-rest-num">04</div>
-          <div class="ax-rest-label"><div class="ax-dot" style="background:var(--ex)"></div><span style="color:var(--ex)">Environment</span></div>
-          <div class="ax-rest-en" style="color:var(--ex)">环境轴</div>
-          <div class="ax-rest-cn">Hardware &amp; Runtime</div>
-        </div>
-        <div class="ax-hint">Click to explore →</div>
-        <div class="ax-close">× Close</div>
-        <div class="ax-expand">
-          <div>
-            <div class="ax-exp-tag"><div class="ax-dot" style="background:var(--ex)"></div><span style="color:var(--ex);font-family:'Space Grotesk',sans-serif;font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;">Environment · 环境</span></div>
-            <div class="ax-exp-title">同一个模型，在每颗芯片上重新出生</div>
-            <p class="ax-exp-body">不同架构、驱动版本、运行时约束——<strong>同一套权重在不同硬件上是完全不同的生命体</strong>。QA 是这条轴上的守门人。工具链是跨宇宙的翻译器，让模型在任何星球都能正常呼吸。</p>
-          </div>
-          <div>
-            <div class="ax-exp-bar"><div class="ax-exp-fill" style="background:var(--ex);--fill-w:83%"></div></div>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /axes-stage -->
-
-    <!-- Selection concept below -->
-    <div class="axes-below" data-obs>
-      <div class="ab-left">
-        <div class="ab-label">The Choice · 选择的本质</div>
-        <h3 class="ab-headline">坐标轴定义维度，<br><strong>你的选择决定宇宙</strong></h3>
-        <p class="ab-body">这四条轴只是我们今天能命名的维度。每当我们发现新的系统性问题，就是在<strong>发现一条新的坐标轴</strong>——工具链的边界，随着团队的认知一起扩展。</p>
-      </div>
-      <div class="ab-right">
-        <div class="ab-point">
-          <span class="ab-arrow">→</span>
-          <span>精度目标偏移 1%，可能意味着<strong>完全不同的量化策略</strong>和算子实现</span>
-        </div>
-        <div class="ab-point">
-          <span class="ab-arrow">→</span>
-          <span>性能目标提升 2x，可能需要<strong>重新设计整个 pass 调度顺序</strong></span>
-        </div>
-        <div class="ab-point">
-          <span class="ab-arrow">→</span>
-          <span>内存限制缩减一半，模型的<strong>生死边界</strong>就在 operator 的排列方式里</span>
-        </div>
-        <div class="ab-point">
-          <span class="ab-arrow">→</span>
-          <span>换一颗芯片，过去所有经验<strong>重新归零</strong>——直到工具链说它懂了</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
+<!-- TX: Beacon -->
+<div class="tx-wrap" id="tx-beacon-wrap"><canvas id="txBeacon"></canvas></div>
 
 <!-- ══ HUMAN × AI ══ -->
 <section id="expand">
   <div class="wrap">
     <div class="exp-grid">
-      <div class="exp-left" data-obs>
-        <div class="eyebrow exp-kicker"><div class="ey-line"></div>Human × AI · 多元宇宙探索</div>
-        <h2 class="exp-h">工程师能探索的时空<strong>是有限的</strong></h2>
-        <p class="exp-p">在四维坐标轴张开的超大相空间里，穷举所有可能需要数百年。</p>
-        <p class="exp-p">但当<strong>工程师的直觉</strong>与<strong>AI 的算力</strong>结合，探索半径成倍扩展——测试覆盖更全，瓶颈自动定位，模型自适应收敛到最优坐标点。</p>
-        <p class="exp-p">工程师从此可以把目光聚焦于<strong>世界观的构建</strong>，把 dirty work 留给工具链。</p>
-        <div class="exp-pill"><div class="ax-dot" style="background:var(--ax);width:5px;height:5px"></div>人类直觉 × AI 算力 = 全域探索</div>
+      <div class="exp-l" data-obs>
+        <div class="eyebrow exp-kicker"><div class="ey-line"></div>Human × AI · 扩大探索半径</div>
+        <h2 class="exp-h">人类能搜索的解空间<strong><span class="gk-px">永远是局部的</span></strong></h2>
+        <p class="exp-p">四个 Galaxy 同时施压，每个维度内部都有数十颗星球需要权衡。穷举所有组合，在工程时限内根本不可能做到。</p>
+        <p class="exp-p">Toolchain 的价值，是<strong><span class="gk-ax">扩大探索半径</span></strong>——自动化覆盖更多候选解，让工程师从重复试错中解放出来，把判断力留给真正需要判断的地方。</p>
+        <p class="exp-p">加入 AI 之后，探索半径再次量级扩展。<strong>不是替代工程师的直觉，而是让直觉能<span class="gk-px">触达更远的星球</span>。</strong></p>
+        <div class="exp-pill"><div style="width:5px;height:5px;border-radius:50%;background:var(--ax)"></div><span class="gk-ax">Toolchain</span> + <span class="gk-px">AI</span> · 逼近全局最优</div>
       </div>
-      <div class="exp-right" data-obs>
+      <div class="exp-r" data-obs>
         <canvas id="coordCanvas"></canvas>
       </div>
     </div>
   </div>
+
+  <div class="mob-nav"><button class="mob-nav-btn" onclick="document.getElementById('manifesto').scrollIntoView({behavior:'smooth'})">← Back</button><span class="mob-nav-label">EXPAND</span><button class="mob-nav-btn" onclick="document.getElementById('story').scrollIntoView({behavior:'smooth'})">2030 Story →</button></div>
 </section>
+
+<!-- TX: Portal -->
+<div class="tx-wrap" id="tx-portal-wrap"><canvas id="txPortal"></canvas></div>
 
 <!-- ══ STORY ══ -->
 <section id="story">
   <div class="wrap">
     <div class="story-intro" data-obs>
       <div class="eyebrow" style="justify-content:center"><div class="ey-line"></div>2030 · A Day in the Future<div class="ey-line"></div></div>
-      <h2 class="s-title" style="text-align:center"><em>那一天</em><strong>工具链已替你工作了一整夜</strong></h2>
+      <h2 class="s-title" style="text-align:center"><em>那一天</em><strong><span class="gk-multi">工具链</span>已替你工作了一整夜</strong></h2>
     </div>
     <div class="story-rows">
-
       <div class="story-row" data-obs>
         <div class="sr-time"><b>08:47</b>Morning</div>
         <div>
           <h3 class="sr-title">PR 已就绪，<em>Alex 还没到</em></h3>
-          <p class="sr-body">Alex 打开显示器，日报已推送。昨晚 23:11，工具链在<strong>精度-性能平面</strong>上自动搜索 2400 个候选点，锁定客户模型最优配置，提交了 PR，附完整 benchmark 报告。</p>
-          <div class="sr-code">
-            <span class="cg">✓</span> <span class="ca">toolchain-bot</span> opened PR #2847 · 23:11<br>
-            <span class="cp">search_space:</span> <span class="co">2,400 candidates</span> across [acc × perf]<br>
-            <span class="ca">optimal:</span> acc=98.7% · thr=340 tok/s · mem=4.1GB
-          </div>
+          <p class="sr-body">Alex 打开显示器，日报已推送。昨晚 23:11，工具链在<strong><span class="gk-ax">精度</span>-<span class="gk-px">性能</span>平面</strong>上自动搜索 2400 个候选点，锁定客户模型最优配置，提交 PR，附完整 benchmark 报告。</p>
+          <div class="sr-code"><span class="cg">✓</span> <span class="ca">toolchain-bot</span> opened PR #2847 · 23:11<br><span class="cp">search_space:</span> <span class="co">2,400 candidates</span> across [acc × perf]<br><span class="ca">optimal:</span> acc=98.7% · thr=340 tok/s · mem=4.1GB</div>
         </div>
       </div>
-
       <div class="story-row" data-obs style="transition-delay:80ms">
         <div class="sr-time"><b>10:30</b>Morning</div>
         <div>
           <h3 class="sr-title">瓶颈在哪里，<em>工具链说</em></h3>
-          <p class="sr-body">客户反馈时延偏高。以前需要逐层手动 profile，耗时一天。工具链自动标注<strong>热点 operator</strong>，给出三条优化路径并预测各路径在目标芯片上的收益。compiler 团队 20 分钟做决策，剩下交给工具链跑。</p>
+          <p class="sr-body">客户反馈时延偏高。工具链自动标注<strong><span class="gk-mx">热点 operator</span></strong>，给出三条优化路径并预测各路径收益。compiler 团队 20 分钟做决策，剩下交给工具链跑。</p>
         </div>
       </div>
-
       <div class="story-row" data-obs style="transition-delay:160ms">
         <div class="sr-time"><b>14:30</b>Afternoon</div>
         <div>
           <h3 class="sr-title">三颗星球，<em>同一个模型</em></h3>
-          <p class="sr-body">客户需在三种架构的芯片上部署同一模型。工具链在<strong>环境轴</strong>上自动生成三套编译策略，accuracy 全程有 QA 守护，全程无需手动迁移。测试覆盖 100%，没有一个算子掉进死角。</p>
-          <div class="sr-code">
-            <span class="cg">✓</span> arch_A: <span class="co">+22% throughput</span><br>
-            <span class="cg">✓</span> arch_B: <span class="co">-18% memory</span> · latency within SLA<br>
-            <span class="cg">✓</span> arch_C: <span class="cp">accuracy preserved</span> · 99.1% pass rate
-          </div>
+          <p class="sr-body">客户需在三种架构芯片上部署同一模型。工具链在<strong><span class="gk-ex">环境轴</span></strong>自动生成三套编译策略，QA 全程守护 accuracy，测试覆盖 100%。</p>
+          <div class="sr-code"><span class="cg">✓</span> arch_A: <span class="co">+22% throughput</span><br><span class="cg">✓</span> arch_B: <span class="co">-18% memory</span> · latency within SLA<br><span class="cg">✓</span> arch_C: <span class="cp">accuracy preserved</span> · 99.1% pass rate</div>
         </div>
       </div>
-
       <div class="story-row" data-obs style="transition-delay:240ms">
         <div class="sr-time"><b>17:55</b>Evening</div>
         <div>
           <h3 class="sr-title">工程师在思考，<em>而不是在找 bug</em></h3>
-          <p class="sr-body">Alex 合上电脑。今天没有一次手动 profile，没有一次通宵排查。她把整个下午花在更根本的问题上：坐标轴本身，应不应该增加新的维度？<br><br>这才是工程师真正该做的事。</p>
+          <p class="sr-body">Alex 合上电脑。今天没有一次手动 profile，没有通宵排查。她把整个下午花在更根本的问题上：坐标轴本身，应不应该增加新的维度？<br><br>这才是工程师真正该做的事。</p>
         </div>
       </div>
-
     </div>
   </div>
+
+  <div class="mob-nav"><button class="mob-nav-btn" onclick="document.getElementById('expand').scrollIntoView({behavior:'smooth'})">← Back</button><span class="mob-nav-label">STORY</span><button class="mob-nav-btn" onclick="document.getElementById('dialog').scrollIntoView({behavior:'smooth'})">Ask 2030 →</button></div>
 </section>
+
+<!-- TX: Signal -->
+<div class="tx-wrap" id="tx-signal-wrap"><canvas id="txSignal"></canvas></div>
 
 <!-- ══ DIALOG ══ -->
 <section id="dialog">
   <div class="wrap-sm">
     <div class="dlg-intro" data-obs>
       <div class="eyebrow" style="justify-content:center"><div class="ey-line"></div>Ask 2030 · 与未来对话<div class="ey-line"></div></div>
-      <h2 class="s-title" style="text-align:center"><em>连接</em><strong>2030 年的工具链</strong></h2>
+      <h2 class="s-title" style="text-align:center"><em>连接</em><strong>2030 年的<span class="gk-ax">工具链</span></strong></h2>
     </div>
     <div class="dlg-shell" data-obs>
-      <div class="dlg-bar">
-        <div class="dd dd-g"></div><div class="dd dd-p"></div>
-        <span style="margin-left:6px">toolchain-2030 · Mikrokosmos Coordinate System · Online</span>
-      </div>
+      <div class="dlg-bar"><div class="dd dd-g"></div><div class="dd dd-p"></div><span style="margin-left:6px">toolchain-2030 · Mikrokosmos Coordinate System · Online</span></div>
       <div class="dlg-body">
-        <div class="sys-row">
-          <span class="sys-chip">SYS</span>
-          <span>你正在连接 2030 年的工具链 AI。它见证了这支团队如何在坐标轴上拓展可探索的宇宙边界。向它提问——</span>
-        </div>
+        <div class="sys-row"><span class="sys-chip">SYS</span><span>你正在连接 2030 年的工具链 AI。它见证了这支团队如何在坐标轴上拓展可探索的宇宙边界。向它提问——</span></div>
         <div class="presets">
           <button class="preset" onclick="askQ(this)">2030年工程师的一天是怎样的？</button>
           <button class="preset" onclick="askQ(this)">工具链帮我们探索了多少个坐标点？</button>
@@ -702,17 +714,24 @@ footer{position:relative;z-index:2;padding:80px 52px;border-top:1px solid var(--
       </div>
     </div>
   </div>
+
+  <div class="mob-nav"><button class="mob-nav-btn" onclick="document.getElementById('story').scrollIntoView({behavior:'smooth'})">← Back</button><span class="mob-nav-label">DIALOG</span><button class="mob-nav-btn" onclick="document.getElementById('wishes').scrollIntoView({behavior:'smooth'})">Wishes →</button></div>
 </section>
+
+<!-- TX: Drift -->
+<div class="tx-wrap" id="tx-drift-wrap"><canvas id="txDrift"></canvas></div>
 
 <!-- ══ WISHES ══ -->
 <section id="wishes">
   <div class="wrap">
     <div class="wishes-top" data-obs>
       <div class="eyebrow" style="justify-content:center"><div class="ey-line"></div>Team Wishes · 团队寄语<div class="ey-line"></div></div>
-      <h2 class="s-title" style="text-align:center"><em>写给</em><strong>坐标轴另一端的自己</strong></h2>
+      <h2 class="s-title" style="text-align:center"><em>写给</em><strong><span class="gk-multi">坐标轴</span>另一端的自己</strong></h2>
     </div>
     <div class="wish-grid" id="wishGrid"></div>
   </div>
+
+  <div class="mob-nav"><button class="mob-nav-btn" onclick="document.getElementById('dialog').scrollIntoView({behavior:'smooth'})">← Back</button><span class="mob-nav-label">WISHES</span><span class="mob-nav-btn hidden">Next →</span></div>
 </section>
 
 <footer>
@@ -721,27 +740,570 @@ footer{position:relative;z-index:2;padding:80px 52px;border-top:1px solid var(--
 </footer>
 
 <script>
-/* ══ STARS ══ */
+/* ══════════════════════════════════
+   3D STAR GALAXY — DATA
+══════════════════════════════════ */
+const GALAXY_DATA = [
+  {
+    id:0, label:'Accuracy', cn:'精度轴', color:'#4af0ff',
+    body:'每一个 bit 的选择都在精度轴上留下刻度。量化误差、算子精度、数值稳定性——决定了客户模型能走多远。掉精度不是失败，是还没找到正确的坐标点。',
+    nodes:[
+      {name:'INT8 量化',    en:'INT8 Quant',      desc:'将 FP32 权重映射到 8-bit 整数，在精度损失可控的前提下大幅降低计算开销'},
+      {name:'INT4 量化',    en:'INT4 Quant',      desc:'极限压缩精度，需要精细的混合精度策略保护敏感层'},
+      {name:'混合精度',     en:'Mixed Precision', desc:'对不同层使用不同 bit-width，在精度与性能之间寻找帕累托最优'},
+      {name:'算子精度',     en:'Op Precision',    desc:'单个 operator 的数值行为验证，确保计算结果在容忍范围内'},
+      {name:'精度对齐',     en:'Acc Alignment',   desc:'工具链输出与参考实现逐层对比，定位精度退化的根因'},
+      {name:'数值稳定性',   en:'Num Stability',   desc:'Softmax、LayerNorm 等算子在极端输入下的数值溢出防护'},
+      {name:'Calibration', en:'Calibration',     desc:'通过代表性数据集校准量化参数，减少统计偏差'},
+      {name:'精度回归',     en:'Acc Regression',  desc:'版本迭代中自动检测精度退化，守住每一次 commit 的底线'},
+    ]
+  },
+  {
+    id:1, label:'Performance', cn:'性能轴', color:'#a78bfa',
+    body:'吞吐量、时延、利用率——瓶颈永远藏在你以为没问题的地方。benchmark 是这条轴上的眼睛，compiler 是改变轨迹的手。',
+    nodes:[
+      {name:'吞吐量',       en:'Throughput',      desc:'单位时间内处理的 token 数或 batch 数，衡量模型在目标硬件上的生产效率'},
+      {name:'推理时延',     en:'Latency P99',     desc:'端到端推理延迟，P99 分位数是工程交付的真实承诺'},
+      {name:'算力利用率',   en:'MFU',             desc:'Model FLOPS Utilization，衡量算力是否被充分榨取'},
+      {name:'Pass 调度',    en:'Pass Schedule',   desc:'编译 pass 的执行顺序对性能影响深远，错误的顺序会导致优化机会丢失'},
+      {name:'算子融合',     en:'Op Fusion',       desc:'将相邻算子合并为单个 kernel，减少内存往返，是性能优化的核心手段'},
+      {name:'Benchmark 套件',en:'Benchmark Suite',desc:'覆盖典型模型和场景的性能测试集，是性能轴上的度量衡'},
+      {name:'时延分解',     en:'Latency Profile', desc:'逐层拆解推理耗时，精准定位瓶颈算子'},
+      {name:'批处理优化',   en:'Batch Tuning',    desc:'动态 batch size 策略，在吞吐与时延之间找到平衡点'},
+    ]
+  },
+  {
+    id:2, label:'Memory', cn:'存储轴', color:'#fb923c',
+    body:'片上内存、带宽墙、缓存策略——存储不够不是模型的问题，是编排方式的问题。operator 的调度顺序决定了数据流的命运。',
+    nodes:[
+      {name:'片上内存',     en:'On-chip SRAM',    desc:'SRAM 容量是芯片上最稀缺的资源，模型能否运行取决于对它的编排'},
+      {name:'带宽优化',     en:'Bandwidth Opt',   desc:'内存带宽是性能上限，算子的访存模式决定了能否打满带宽'},
+      {name:'Buffer 复用',  en:'Buffer Reuse',    desc:'中间激活的生命周期分析，最大化内存复用率，让模型在更小的空间里运行'},
+      {name:'内存分配',     en:'Mem Allocation',  desc:'静态 vs 动态分配策略，以及碎片化防控'},
+      {name:'权重压缩',     en:'Weight Compress', desc:'通过剪枝、稀疏化等手段减少权重存储占用'},
+      {name:'KV Cache',     en:'KV Cache Mgmt',   desc:'LLM 推理中 KV Cache 的内存管理策略，直接决定序列长度上限'},
+      {name:'数据布局',     en:'Data Layout',     desc:'NCHW vs NHWC vs 自定义 tiling，硬件友好的数据排布是性能的基础'},
+      {name:'内存带宽墙',   en:'Memory Wall',     desc:'分析模型在什么情况下被带宽而非算力瓶颈，指导优化方向'},
+    ]
+  },
+  {
+    id:3, label:'Environment', cn:'环境轴', color:'#34d399',
+    body:'不同架构、驱动版本、运行时约束——同一套权重在不同硬件上是完全不同的生命体。工具链是跨宇宙的翻译器，QA 是守门人。',
+    nodes:[
+      {name:'硬件架构适配', en:'HW Arch Adapt',   desc:'针对不同芯片架构（NPU/GPU/DSP）生成最优的 IR 和后端代码'},
+      {name:'驱动兼容性',   en:'Driver Compat',   desc:'跨驱动版本的一致性验证，确保升级不带来行为回退'},
+      {name:'运行时框架',   en:'Runtime Stack',   desc:'推理运行时的选择与适配，包括内存管理、线程调度、异步执行'},
+      {name:'回归测试',     en:'Regression Test', desc:'每次代码变更触发全量测试，是环境轴上的最后一道防线'},
+      {name:'跨平台部署',   en:'Cross-platform',  desc:'同一模型在多种硬件上的一致行为验证，toolchain 的核心价值之一'},
+      {name:'算子白名单',   en:'Op Whitelist',    desc:'明确目标硬件支持的算子集合，是模型适配的起点'},
+      {name:'集成测试',     en:'Integration Test', desc:'端到端的系统级测试，覆盖从模型输入到最终输出的完整链路'},
+      {name:'环境隔离',     en:'Env Isolation',   desc:'容器化测试环境，确保测试结果的可复现性'},
+    ]
+  }
+];
+
+/* ══════════════════════════════════
+   3D STAR GALAXY ENGINE v3
+   — no core/axis nodes, pure stars
+   — free scattered distribution
+   — random multi-star auto-highlight
+   — galaxy cards sync highlight
+══════════════════════════════════ */
+(function() {
+  const canvas = document.getElementById('graphCanvas');
+  const ctx    = canvas.getContext('2d');
+  const stage  = document.getElementById('graphStage');
+  let W, H, cx, cy;
+  const mobile = () => window.innerWidth < 768;
+
+  /* ── rotation ── */
+  let rotX = 0.28, rotY = 0.5;
+  let autoSpin  = true;
+  let isDrag    = false;
+  let dragX0=0, dragY0=0, lastDX=0, lastDY=0;
+  let velY = 0;
+  let animT = 0;
+
+  /* ── auto-highlight state ── */
+  // highlighted = set of star indices lit up right now
+  let highlighted   = new Set();
+  let lockedStar    = null;   // user clicked a star
+  let autoHighTimer = null;
+  const AUTO_MS     = 2200;   // how often to change highlight batch
+  const AUTO_COUNT  = 3;      // how many stars glow at once
+
+  /* ── scene ── */
+  let bgStars = [];   // pure decorative background
+  let stars   = [];   // the 32 data stars
+
+  /* ── projected cache ── */
+  let proj = [];
+
+  /* ────────────────────────────────
+     RESIZE
+  ──────────────────────────────── */
+  function resize() {
+    const r = stage.getBoundingClientRect();
+    W = canvas.width  = Math.round(r.width);
+    H = canvas.height = Math.round(r.height);
+    cx = W/2; cy = H/2;
+    buildScene();
+  }
+
+  /* ────────────────────────────────
+     BUILD — all 32 stars on sphere,
+     freely scattered via Fibonacci
+  ──────────────────────────────── */
+  function buildScene() {
+    bgStars = []; stars = [];
+
+    // Background star field
+    for(let i=0;i<320;i++){
+      const th=Math.random()*Math.PI*2;
+      const ph=Math.acos(2*Math.random()-1);
+      const r=250+Math.random()*220;
+      bgStars.push({
+        x:r*Math.sin(ph)*Math.cos(th),
+        y:r*Math.sin(ph)*Math.sin(th),
+        z:r*Math.cos(ph),
+        r:Math.random()*1.1+0.2,
+        a:Math.random()*0.5+0.12,
+        tw:Math.random()*Math.PI*2
+      });
+    }
+
+    // Data stars: Fibonacci sphere, radius ~145, organic scatter
+    const golden = Math.PI*(3-Math.sqrt(5));
+    const total  = GALAXY_DATA.reduce((s,ax)=>s+ax.nodes.length, 0); // 32
+    let idx = 0;
+
+    GALAXY_DATA.forEach((ax, ai) => {
+      ax.nodes.forEach((nd, ni) => {
+        // Fibonacci point
+        const y0 = 1 - (idx/(total-1))*2;
+        const r0 = Math.sqrt(1-y0*y0);
+        const th = golden*idx;
+
+        // Radius: vary organically between 160–270 for loose scatter ~half canvas
+        const baseR = 195 + Math.sin(idx*2.3+ai*1.7)*65 + Math.random()*32;
+
+        stars.push({
+          idx, axisIdx:ai,
+          x3: r0*Math.cos(th)*baseR + (Math.random()-.5)*40,
+          y3: y0*baseR              + (Math.random()-.5)*40,
+          z3: r0*Math.sin(th)*baseR + (Math.random()-.5)*40,
+          label: nd.en,
+          labelCn: nd.name,
+          desc: nd.desc,
+          color: ax.color,
+          // vary star size for depth feel
+          r: 3.5 + Math.random()*3.2,
+          tw: Math.random()*Math.PI*2,
+          axLabel: ax.label, axCn: ax.cn, axBody: ax.body
+        });
+        idx++;
+      });
+    });
+  }
+
+  /* ────────────────────────────────
+     PROJECT
+  ──────────────────────────────── */
+  function project(x3,y3,z3){
+    const cY=Math.cos(rotY),sY=Math.sin(rotY);
+    const x1=x3*cY-z3*sY, z1=x3*sY+z3*cY;
+    const cX=Math.cos(rotX),sX=Math.sin(rotX);
+    const y1=y3*cX-z1*sX, z2=y3*sX+z1*cX;
+    const fov=Math.min(W,H)*1.05;
+    const sc=fov/(fov+z2+160);
+    return{sx:cx+x1*sc, sy:cy+y1*sc, sc, zd:z2};
+  }
+
+  /* ────────────────────────────────
+     DRAW
+  ──────────────────────────────── */
+  function draw(t){
+    ctx.clearRect(0,0,W,H);
+    animT = t*0.001;
+
+    if(autoSpin && !isDrag){
+      rotY += 0.0022;
+      rotX += Math.sin(animT*0.06)*0.00022;
+      velY *= 0.9;
+    }
+
+    // Build projection cache
+    proj = stars.map(s=>({...s,...project(s.x3,s.y3,s.z3)}));
+
+    /* bg stars */
+    bgStars.forEach(s=>{
+      const p=project(s.x,s.y,s.z);
+      const tw=Math.sin(animT*1.4+s.tw)*0.32+0.68;
+      ctx.globalAlpha=Math.min(1,s.a*tw*p.sc*1.15);
+      ctx.fillStyle='#fff';
+      ctx.beginPath();ctx.arc(p.sx,p.sy,s.r*p.sc,0,Math.PI*2);ctx.fill();
+    });
+    ctx.globalAlpha=1;
+
+    /* sort back→front */
+    const sorted=[...proj].sort((a,b)=>a.zd-b.zd);
+
+    /* draw thin constellation edges between nearby same-axis stars */
+    drawEdges(sorted);
+
+    /* draw data stars */
+    sorted.forEach(s=>drawStar(s));
+
+    requestAnimationFrame(draw);
+  }
+
+  /* subtle edges within same galaxy */
+  function drawEdges(sorted){
+    for(let i=0;i<sorted.length;i++){
+      for(let j=i+1;j<sorted.length;j++){
+        const a=sorted[i], b=sorted[j];
+        if(a.axisIdx!==b.axisIdx) continue;
+        const dist3=Math.hypot(a.x3-b.x3,a.y3-b.y3,a.z3-b.z3);
+        if(dist3>140) continue;          // only connect close neighbors
+
+        const aHot = highlighted.has(a.idx)||lockedStar===a.idx;
+        const bHot = highlighted.has(b.idx)||lockedStar===b.idx;
+        const hot  = aHot||bHot;
+        const alpha= hot ? 0.28 : 0.04;
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(a.sx,a.sy);ctx.lineTo(b.sx,b.sy);
+        ctx.strokeStyle=a.color+Math.round(alpha*255).toString(16).padStart(2,'0');
+        ctx.lineWidth=hot?0.9:0.35;
+        ctx.stroke();
+
+        // animated pulse dot on hot edges
+        if(hot&&!lockedStar){
+          const p=(Math.sin(animT*2.8+(a.tw+b.tw)*.5)+1)/2;
+          ctx.beginPath();
+          ctx.arc(a.sx+(b.sx-a.sx)*p, a.sy+(b.sy-a.sy)*p, 1.8,0,Math.PI*2);
+          ctx.fillStyle=a.color+'cc';ctx.fill();
+        }
+        ctx.restore();
+      }
+    }
+  }
+
+  function drawStar(s){
+    const isLocked  = lockedStar===s.idx;
+    const isHot     = highlighted.has(s.idx)||isLocked;
+    const tw        = Math.sin(animT*(isHot?1.8:0.85)+s.tw)*0.28+0.72;
+    const rBase     = s.r*s.sc;
+    const r         = rBase*tw*(isLocked?2.2:isHot?1.55:1);
+    const dimAlpha  = 0.18;
+
+    /* glow layers for hot stars */
+    if(isHot){
+      // outer soft glow
+      const gR=r*(isLocked?7:5.5);
+      const g=ctx.createRadialGradient(s.sx,s.sy,0,s.sx,s.sy,gR);
+      g.addColorStop(0, s.color+(isLocked?'60':'45'));
+      g.addColorStop(0.35, s.color+(isLocked?'28':'18'));
+      g.addColorStop(1, s.color+'00');
+      ctx.beginPath();ctx.arc(s.sx,s.sy,gR,0,Math.PI*2);
+      ctx.fillStyle=g;ctx.fill();
+
+      // halo ring
+      const hR=r*(1.9+Math.sin(animT*2.1+s.tw)*0.18);
+      ctx.beginPath();ctx.arc(s.sx,s.sy,hR,0,Math.PI*2);
+      ctx.strokeStyle=s.color+(isLocked?'66':'44');
+      ctx.lineWidth=0.9;ctx.stroke();
+    }
+
+    /* star body */
+    ctx.globalAlpha=isHot?1:dimAlpha;
+    ctx.beginPath();ctx.arc(s.sx,s.sy,r,0,Math.PI*2);
+    ctx.fillStyle=s.color;ctx.fill();
+
+    /* bright centre */
+    if(isHot){
+      ctx.globalAlpha=1;
+      ctx.beginPath();ctx.arc(s.sx,s.sy,r*0.38,0,Math.PI*2);
+      ctx.fillStyle='#ffffff';ctx.fill();
+    }
+    ctx.globalAlpha=1;
+
+    /* label — only for hot stars */
+    if(isHot){
+      const fs=Math.max(9,10*s.sc*(isLocked?1.25:1));
+      ctx.font=`${isLocked?'500':'400'} ${fs}px Space Grotesk,sans-serif`;
+      ctx.fillStyle=isLocked?'#ffffff':s.color+'ee';
+      ctx.textAlign='center';ctx.textBaseline='top';
+      ctx.fillText(s.label, s.sx, s.sy+r+5);
+    }
+  }
+
+  /* ────────────────────────────────
+     AUTO HIGHLIGHT
+  ──────────────────────────────── */
+  function pickRandomBatch(){
+    if(lockedStar!==null) return;
+    // pick AUTO_COUNT random stars, can span any galaxy
+    const pool=[...Array(stars.length).keys()];
+    const picked=[];
+    while(picked.length<AUTO_COUNT && pool.length){
+      const ri=Math.floor(Math.random()*pool.length);
+      picked.push(pool.splice(ri,1)[0]);
+    }
+    highlighted=new Set(picked);
+
+    // sync galaxy cards
+    const activeCats=new Set(picked.map(i=>stars[i].axisIdx));
+    document.querySelectorAll('.gc').forEach(el=>{
+      const gi=parseInt(el.id.split('-')[1]);
+      el.classList.toggle('active-galaxy', activeCats.has(gi));
+    });
+  }
+
+  function startAutoHighlight(){
+    clearInterval(autoHighTimer);
+    pickRandomBatch();
+    autoHighTimer=setInterval(()=>{
+      if(!lockedStar) pickRandomBatch();
+    }, AUTO_MS);
+  }
+
+  /* ────────────────────────────────
+     HIT TEST
+  ──────────────────────────────── */
+  function hitTest(clientX, clientY){
+    const rect=canvas.getBoundingClientRect();
+    const scX=W/rect.width, scY=H/rect.height;
+    const mx=(clientX-rect.left)*scX;
+    const my=(clientY-rect.top)*scY;
+    const minHit=mobile()?44:20;
+    let best=null, bestD=Infinity;
+    proj.forEach(s=>{
+      const hitR=Math.max(minHit, s.r*s.sc*(highlighted.has(s.idx)?6:4.5));
+      const d=Math.hypot(s.sx-mx,s.sy-my);
+      if(d<hitR&&d<bestD){bestD=d;best=s;}
+    });
+    return best;
+  }
+
+  /* ────────────────────────────────
+     PANEL
+  ──────────────────────────────── */
+  function fillPanel(ids, s){
+    const ax=GALAXY_DATA[s.axisIdx];
+    ids.dot.style.background=s.color;
+    ids.cat.textContent=ax.label;
+    ids.cat.style.cssText=`font-family:'Space Grotesk',sans-serif;font-size:.48rem;letter-spacing:.26em;text-transform:uppercase;color:${s.color}`;
+    ids.name.textContent=s.label;
+    ids.name.style.color=s.color;
+    ids.cn.textContent=s.labelCn;
+    ids.body.innerHTML=s.desc;
+  }
+
+  function showPanel(s){
+    autoSpin=false;
+    clearInterval(autoHighTimer);
+    lockedStar=s.idx;
+    highlighted=new Set([s.idx]);
+
+    // sync galaxy cards — highlight the matching axis card
+    document.querySelectorAll('.gc').forEach(el=>{
+      const match = el.id===`gc-${s.axisIdx}`;
+      el.classList.toggle('active-galaxy', match);
+    });
+
+    if(mobile()){
+      const m=document.getElementById('gpMobile');
+      fillPanel({
+        dot:document.getElementById('gpDotM'),
+        cat:document.getElementById('gpCatM'),
+        name:document.getElementById('gpNameM'),
+        cn:document.getElementById('gpCnM'),
+        body:document.getElementById('gpBodyM')
+      }, s);
+      m.classList.add('show');
+    } else {
+      const panel=document.getElementById('graphPanel');
+      fillPanel({
+        dot:document.getElementById('gpDot'),
+        cat:document.getElementById('gpCat'),
+        name:document.getElementById('gpName'),
+        cn:document.getElementById('gpCn'),
+        body:document.getElementById('gpBody')
+      }, s);
+
+      // sub-list: sibling stars in same galaxy
+      const sub=document.getElementById('gpSub');
+      document.getElementById('gpSubTitle').textContent='Galaxy · 同轴星点';
+      sub.innerHTML='';
+      const ax=GALAXY_DATA[s.axisIdx];
+      ax.nodes.forEach(nd=>{
+        const d=document.createElement('div');
+        d.className='gp-sub-item';
+        d.innerHTML=`<div class="gp-sub-dot" style="background:${s.color}88"></div>${nd.en}<span style="color:var(--ink-10);margin-left:5px;font-size:.52rem">${nd.name}</span>`;
+        sub.appendChild(d);
+      });
+      panel.classList.add('show');
+    }
+    document.getElementById('graphHint').textContent='Click anywhere to resume';
+  }
+
+  function closePanel(){
+    lockedStar=null;
+    document.getElementById('graphPanel').classList.remove('show');
+    document.querySelectorAll('.gc').forEach(el=>el.classList.remove('active-galaxy'));
+    autoSpin=true;
+    startAutoHighlight();
+    document.getElementById('graphHint').textContent='Drag to rotate · Click a star to explore';
+  }
+  function closeMobilePanel(){
+    lockedStar=null;
+    document.getElementById('gpMobile').classList.remove('show');
+    document.querySelectorAll('.gc').forEach(el=>el.classList.remove('active-galaxy'));
+    autoSpin=true;
+    startAutoHighlight();
+  }
+  /* ── Galaxy card click ── */
+  function selectGalaxy(axisIdxOrAll){
+    clearInterval(autoHighTimer);
+    autoSpin=false;
+    lockedStar=null;
+    document.getElementById('graphPanel').classList.remove('show');
+    document.getElementById('gpMobile').classList.remove('show');
+
+    if(axisIdxOrAll==='all'){
+      highlighted=new Set(stars.map(s=>s.idx));
+      document.querySelectorAll('.gc').forEach(el=>{
+        el.classList.toggle('active-galaxy', el.id==='gc-all');
+      });
+      document.getElementById('graphHint').textContent='All 32 stars · Click a star to explore';
+    } else {
+      const idx=parseInt(axisIdxOrAll);
+      highlighted=new Set(stars.filter(s=>s.axisIdx===idx).map(s=>s.idx));
+      document.querySelectorAll('.gc').forEach(el=>{
+        el.classList.toggle('active-galaxy', el.id===`gc-${idx}`);
+      });
+      const axLabel=GALAXY_DATA[idx].label;
+      document.getElementById('graphHint').textContent=axLabel+' · Click a star to explore';
+    }
+    // auto-resume after 5s of inactivity
+    clearTimeout(selectGalaxy._resumeTimer);
+    selectGalaxy._resumeTimer=setTimeout(()=>{
+      if(!lockedStar){ autoSpin=true; startAutoHighlight(); }
+    },5000);
+  }
+  window.selectGalaxy = selectGalaxy;
+  window.closePanel       = closePanel;
+  window.closeMobilePanel = closeMobilePanel;
+
+  /* ────────────────────────────────
+     MOUSE
+  ──────────────────────────────── */
+  let didMove=false;
+  canvas.addEventListener('mousedown',e=>{
+    isDrag=true;didMove=false;
+    dragX0=lastDX=e.clientX;dragY0=lastDY=e.clientY;
+    autoSpin=false;
+  });
+  window.addEventListener('mousemove',e=>{
+    if(isDrag){
+      const dx=e.clientX-lastDX,dy=e.clientY-lastDY;
+      if(Math.abs(dx)+Math.abs(dy)>2)didMove=true;
+      rotY+=dx*0.006;rotX+=dy*0.004;
+      rotX=Math.max(-Math.PI/2.1,Math.min(Math.PI/2.1,rotX));
+      velY=dx*0.006;lastDX=e.clientX;lastDY=e.clientY;
+    } else {
+      const hit=hitTest(e.clientX,e.clientY);
+      canvas.style.cursor=hit?'pointer':'grab';
+    }
+  });
+  window.addEventListener('mouseup',e=>{
+    if(!isDrag)return;
+    isDrag=false;canvas.style.cursor='grab';
+    if(!didMove){
+      const hit=hitTest(e.clientX,e.clientY);
+      if(hit) showPanel(hit);
+      else closePanel();
+    } else {
+      if(!lockedStar) setTimeout(()=>{autoSpin=true;startAutoHighlight();},1800);
+    }
+  });
+
+  /* ────────────────────────────────
+     TOUCH
+  ──────────────────────────────── */
+  let tX0=0,tY0=0,tLX=0,tLY=0,tMoved=false,tScrolling=false;
+  canvas.addEventListener('touchstart',e=>{
+    const t=e.touches[0];
+    tX0=tLX=t.clientX;tY0=tLY=t.clientY;
+    tMoved=false;tScrolling=false;
+    autoSpin=false;clearInterval(autoHighTimer);
+    // don't preventDefault yet — wait to see direction
+  },{passive:true});
+  canvas.addEventListener('touchmove',e=>{
+    const t=e.touches[0];
+    const dx=t.clientX-tX0,dy=t.clientY-tY0;
+    // Determine intent on first significant movement
+    if(!tMoved && Math.abs(dx)+Math.abs(dy)>6){
+      tScrolling=Math.abs(dy)>Math.abs(dx)*1.2; // mostly vertical → scroll
+      tMoved=true;
+    }
+    if(tScrolling) return; // let browser handle vertical scroll
+    // Horizontal/diagonal → rotate globe
+    const ddx=t.clientX-tLX,ddy=t.clientY-tLY;
+    rotY+=ddx*0.007;rotX+=ddy*0.005;
+    rotX=Math.max(-Math.PI/2.1,Math.min(Math.PI/2.1,rotX));
+    tLX=t.clientX;tLY=t.clientY;
+    e.preventDefault();
+  },{passive:false});
+  canvas.addEventListener('touchend',e=>{
+    const ct=e.changedTouches[0];
+    if(!tMoved){
+      // tap
+      const hit=hitTest(ct.clientX,ct.clientY);
+      if(hit) showPanel(hit);
+      else { closeMobilePanel(); closePanel(); }
+    } else if(!tScrolling){
+      if(!lockedStar) setTimeout(()=>{autoSpin=true;startAutoHighlight();},2000);
+    }
+    if(tScrolling){ autoSpin=true; startAutoHighlight(); }
+  },{passive:true});
+
+  window.addEventListener('resize',()=>{resize();});
+  setTimeout(()=>{
+    resize();
+    startAutoHighlight();
+    requestAnimationFrame(draw);
+  },120);
+
+})();
+
+/* ══════════════════════════════════
+   STAR BACKGROUND
+══════════════════════════════════ */
 const uC=document.getElementById('universe'),uc=uC.getContext('2d');
 let UW,UH;
-const AC=[['rgba(74,240,255,'],['rgba(167,139,250,'],['rgba(251,146,60,'],['rgba(52,211,153,']];
+const AC=['rgba(74,240,255,','rgba(167,139,250,','rgba(251,146,60,','rgba(52,211,153,'];
 function rU(){UW=uC.width=window.innerWidth;UH=uC.height=window.innerHeight;}
 rU();window.addEventListener('resize',rU);
 const ST=[],LN=[],PT=[];
 const SC=['#4af0ff','#a78bfa','#fb923c','#34d399','#ffffff'];
-for(let i=0;i<280;i++)ST.push({x:Math.random(),y:Math.random(),r:Math.random()*.85+.18,a:Math.random(),da:(Math.random()-.5)*.002,s:Math.random()*.00009+.00003,c:SC[i%5]});
-for(let i=0;i<10;i++)LN.push({x1:Math.random(),y1:Math.random(),x2:Math.random(),y2:Math.random(),ci:i%4,al:.018+Math.random()*.022,lf:0,mx:240+Math.random()*280});
-for(let i=0;i<22;i++)PT.push({x:Math.random()*1200,y:Math.random()*900,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,r:Math.random()*.8+.28,ci:i%4,al:Math.random()*.22+.05});
+for(let i=0;i<260;i++)ST.push({x:Math.random(),y:Math.random(),r:Math.random()*.8+.18,a:Math.random(),da:(Math.random()-.5)*.002,s:Math.random()*.00009+.00003,c:SC[i%5]});
+for(let i=0;i<8;i++)LN.push({x1:Math.random(),y1:Math.random(),x2:Math.random(),y2:Math.random(),ci:i%4,al:.015+Math.random()*.02,lf:0,mx:260+Math.random()*280});
+for(let i=0;i<18;i++)PT.push({x:Math.random()*1200,y:Math.random()*900,vx:(Math.random()-.5)*.2,vy:(Math.random()-.5)*.2,r:Math.random()*.7+.25,ci:i%4,al:Math.random()*.18+.04});
 function dU(){
   uc.clearRect(0,0,UW,UH);
-  ST.forEach(s=>{s.y-=s.s;if(s.y<0){s.y=1;s.x=Math.random();}s.a+=s.da;const a=Math.max(0,Math.min(1,s.a));uc.globalAlpha=a*.48;uc.fillStyle=s.c;uc.beginPath();uc.arc(s.x*UW,s.y*UH,s.r,0,Math.PI*2);uc.fill();uc.globalAlpha=1;});
-  LN.forEach(l=>{l.lf++;const p=l.lf/l.mx,f=p<.1?p/.1:p>.9?(1-p)/.1:1;uc.beginPath();uc.moveTo(l.x1*UW,l.y1*UH);uc.lineTo(l.x2*UW,l.y2*UH);uc.strokeStyle=AC[l.ci][0]+(l.al*f)+')';uc.lineWidth=.5;uc.stroke();if(l.lf>=l.mx)Object.assign(l,{x1:Math.random(),y1:Math.random(),x2:Math.random(),y2:Math.random(),lf:0,mx:240+Math.random()*280,ci:Math.floor(Math.random()*4)});});
+  ST.forEach(s=>{s.y-=s.s;if(s.y<0){s.y=1;s.x=Math.random();}s.a+=s.da;const a=Math.max(0,Math.min(1,s.a));uc.globalAlpha=a*.45;uc.fillStyle=s.c;uc.beginPath();uc.arc(s.x*UW,s.y*UH,s.r,0,Math.PI*2);uc.fill();uc.globalAlpha=1;});
+  LN.forEach(l=>{l.lf++;const p=l.lf/l.mx,f=p<.1?p/.1:p>.9?(1-p)/.1:1;uc.beginPath();uc.moveTo(l.x1*UW,l.y1*UH);uc.lineTo(l.x2*UW,l.y2*UH);uc.strokeStyle=AC[l.ci][0]+(l.al*f)+')';uc.lineWidth=.5;uc.stroke();if(l.lf>=l.mx)Object.assign(l,{x1:Math.random(),y1:Math.random(),x2:Math.random(),y2:Math.random(),lf:0,mx:260+Math.random()*280,ci:Math.floor(Math.random()*4)});});
   PT.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=UW;if(p.x>UW)p.x=0;if(p.y<0)p.y=UH;if(p.y>UH)p.y=0;uc.fillStyle=AC[p.ci][0]+p.al+')';uc.beginPath();uc.arc(p.x,p.y,p.r,0,Math.PI*2);uc.fill();});
   requestAnimationFrame(dU);
 }
 dU();
 
-/* ══ COORD CANVAS ══ */
+/* ══════════════════════════════════
+   COORD CANVAS (expand section)
+══════════════════════════════════ */
 const cc=document.getElementById('coordCanvas'),ctx=cc.getContext('2d');
 let CW,cA=0;
 const AD=[{l:'A',c:'#4af0ff'},{l:'P',c:'#a78bfa'},{l:'M',c:'#fb923c'},{l:'E',c:'#34d399'}];
@@ -751,55 +1313,43 @@ function dC(){
   if(!CW){requestAnimationFrame(dC);return;}
   ctx.clearRect(0,0,CW,CW);cA+=.005;
   const cx=CW/2,cy=CW/2,R=CW*.38;
-  [.3,.6,.9].forEach(r=>{ctx.beginPath();ctx.arc(cx,cy,R*r,0,Math.PI*2);ctx.strokeStyle=`rgba(255,255,255,${r*.032})`;ctx.lineWidth=1;ctx.stroke();});
-  AD.forEach((a,i)=>{const ag=cA+i*Math.PI/2;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(ag)*R,cy+Math.sin(ag)*R);ctx.strokeStyle=a.c+'40';ctx.lineWidth=1;ctx.stroke();ctx.fillStyle=a.c+'70';ctx.font=`500 ${CW*.034}px Space Grotesk,sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(a.l,cx+Math.cos(ag)*(R+16),cy+Math.sin(ag)*(R+16));});
-  for(let i=0;i<13;i++){const a=(i/13)*Math.PI*2+cA*.2,r=R*(.11+Math.sin(i*1.8+cA*.32)*.13);ctx.beginPath();ctx.arc(cx+Math.cos(a)*r,cy+Math.sin(a)*r,1.7,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,0.3)';ctx.fill();}
-  for(let i=0;i<30;i++){const a=(i/30)*Math.PI*2+cA*.09,r=R*(.2+Math.sin(i*1.4+cA*.22)*.52);ctx.beginPath();ctx.arc(cx+Math.cos(a)*r,cy+Math.sin(a)*r,1.2,0,Math.PI*2);ctx.fillStyle=AD[i%4].c+'70';ctx.fill();}
+  [.3,.6,.9].forEach(r=>{ctx.beginPath();ctx.arc(cx,cy,R*r,0,Math.PI*2);ctx.strokeStyle=`rgba(255,255,255,${r*.03})`;ctx.lineWidth=1;ctx.stroke();});
+  AD.forEach((a,i)=>{const ag=cA+i*Math.PI/2;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(ag)*R,cy+Math.sin(ag)*R);ctx.strokeStyle=a.c+'38';ctx.lineWidth=1;ctx.stroke();ctx.fillStyle=a.c+'66';ctx.font=`500 ${CW*.034}px Space Grotesk,sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(a.l,cx+Math.cos(ag)*(R+16),cy+Math.sin(ag)*(R+16));});
+  for(let i=0;i<12;i++){const a=(i/12)*Math.PI*2+cA*.2,r=R*(.11+Math.sin(i*1.8+cA*.32)*.13);ctx.beginPath();ctx.arc(cx+Math.cos(a)*r,cy+Math.sin(a)*r,1.6,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,0.28)';ctx.fill();}
+  for(let i=0;i<28;i++){const a=(i/28)*Math.PI*2+cA*.09,r=R*(.2+Math.sin(i*1.4+cA*.22)*.5);ctx.beginPath();ctx.arc(cx+Math.cos(a)*r,cy+Math.sin(a)*r,1.1,0,Math.PI*2);ctx.fillStyle=AD[i%4].c+'66';ctx.fill();}
   const opA=cA*.32+1.4,opR=R*.7,opX=cx+Math.cos(opA)*opR,opY=cy+Math.sin(opA)*opR;
-  ctx.shadowColor='#4af0ff';ctx.shadowBlur=16;ctx.beginPath();ctx.arc(opX,opY,3.5,0,Math.PI*2);ctx.fillStyle='#4af0ff';ctx.fill();ctx.shadowBlur=0;
+  ctx.shadowColor='#4af0ff';ctx.shadowBlur=14;ctx.beginPath();ctx.arc(opX,opY,3,0,Math.PI*2);ctx.fillStyle='#4af0ff';ctx.fill();ctx.shadowBlur=0;
   requestAnimationFrame(dC);
 }
 dC();
 
-/* ══ CURSOR ══ */
+/* ══════════════════════════════════
+   CURSOR
+══════════════════════════════════ */
 const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
 (function aC(){cur.style.transform=`translate(${mx-2.5}px,${my-2.5}px)`;rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.transform=`translate(${rx-13}px,${ry-13}px)`;requestAnimationFrame(aC);})();
-document.querySelectorAll('button,a,input,.ax-cell').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{ring.style.width='38px';ring.style.height='38px';ring.style.borderColor='rgba(255,255,255,.4)';});
+document.querySelectorAll('button,a,input').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.width='36px';ring.style.height='36px';ring.style.borderColor='rgba(255,255,255,.4)';});
   el.addEventListener('mouseleave',()=>{ring.style.width='26px';ring.style.height='26px';ring.style.borderColor='rgba(255,255,255,.22)';});
 });
 
 /* ══ NAV ══ */
 window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50));
 
-/* ══ INTERACTIVE AXES ══ */
-function toggleAx(cell){
-  const isActive=cell.classList.contains('active');
-  document.querySelectorAll('.ax-cell').forEach(c=>c.classList.remove('active'));
-  if(!isActive) cell.classList.add('active');
-}
-
 /* ══ OBSERVER ══ */
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.classList.add('vis');
-      obs.unobserve(e.target);
-    }
-  });
-},{threshold:.1});
-document.querySelectorAll('[data-obs],.story-row,.wish-card,.axes-below').forEach(el=>obs.observe(el));
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);}});},{threshold:.1});
+document.querySelectorAll('[data-obs],.story-row,.wish-card').forEach(el=>obs.observe(el));
 
 /* ══ WISH WALL ══ */
 const WISHES=[
-  {c:'#fb923c',t:'每一个 benchmark 跑出来的数字背后，是我们对这颗芯片能力边界的一次诚实测量。',role:'Benchmark',name:'shuye'},
+  {c:'#fb923c',t:'每一个 benchmark 跑出来的数字，是我们对这颗芯片能力边界的一次诚实测量。',role:'Benchmark',name:'shuye'},
   {c:'#a78bfa',t:'compiler 的工作，是在硬件的规则里找到模型最优雅的生存方式。',role:'Compiler',name:'shuye'},
   {c:'#4af0ff',t:'精度不是妥协的产物，是我们在无数坐标点里找到的那个恰好正确的答案。',role:'Accuracy',name:'shuye'},
   {c:'#34d399',t:'每一个 operator，都是工具链与硬件之间真正对话的原子单位。',role:'Operator',name:'shuye'},
-  {c:'#fb923c',t:'QA 不是流程的终点，是我们对每一个宇宙坐标点是否真实存在的最终确认。',role:'QA',name:'shuye'},
-  {c:'#a78bfa',t:'Every axis we define today is a door we leave open for the engineers of tomorrow.',role:'Toolchain Team',name:'shuye'},
+  {c:'#a78bfa',t:'QA 不是流程的终点，是我们对每一个宇宙坐标点是否真实存在的最终确认。',role:'QA',name:'shuye'},
+  {c:'#4af0ff',t:'Every axis we define today is a door we leave open for the engineers of tomorrow.',role:'Toolchain Team',name:'shuye'},
 ];
 const wg=document.getElementById('wishGrid');
 WISHES.forEach((w,i)=>{
@@ -812,7 +1362,7 @@ WISHES.forEach((w,i)=>{
 /* ══ AUDIO ══ */
 function toggleAudio(){
   const a=document.getElementById('bgm'),b=document.getElementById('audio-btn');
-  if(!a.src||a.src===window.location.href){alert('请将 Mikrokosmos.mp3 与 index.html 放在同一目录，并设置 <audio src="Mikrokosmos.mp3">');return;}
+  if(!a.src||a.src===window.location.href){alert('请将 Mikrokosmos.mp3 与 index.html 放在同一目录，并在代码中设置 <audio src="Mikrokosmos.mp3">');return;}
   if(a.paused){a.play();b.textContent='⏸';b.classList.add('on');}
   else{a.pause();b.textContent='♪';b.classList.remove('on');}
 }
@@ -820,30 +1370,314 @@ function toggleAudio(){
 /* ══ AI DIALOG ══ */
 function askQ(btn){document.getElementById('dInput').value=btn.textContent;sendQ();}
 async function sendQ(){
-  const inp=document.getElementById('dInput'),btn=document.getElementById('dSend'),
-    resp=document.getElementById('dResp'),txt=document.getElementById('dText');
+  const inp=document.getElementById('dInput'),btn=document.getElementById('dSend'),resp=document.getElementById('dResp'),txt=document.getElementById('dText');
   const q=inp.value.trim();if(!q)return;
-  btn.disabled=true;btn.textContent='…';resp.classList.add('show');
-  txt.innerHTML='<span class="cblink"></span>';
+  btn.disabled=true;btn.textContent='…';resp.classList.add('show');txt.innerHTML='<span class="cblink"></span>';
   try{
-    const r=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',max_tokens:1000,
-        system:`你是 2030 年的 AI 工具链系统，代号 Mikrokosmos。世界观：芯片是小宇宙，工具链是时空坐标轴（精度/性能/存储/环境四轴）。你见证了 BST 工具链团队从 2016 到 2030 的成长，今年是他们的第十周年。风格：极简克制，有诗意，带科技感，偶尔用坐标/星体/编译器意象。中文。90字以内。直接回答，不要自我介绍。`,
-        messages:[{role:'user',content:q}]
-      })
-    });
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:`你是 2030 年的 AI 工具链系统，代号 Mikrokosmos。世界观：芯片是小宇宙，工具链是时空坐标轴（精度/性能/存储/环境四轴）。你见证了 BST 工具链团队从 2016 到 2026 十年的成长。风格：极简克制，有诗意，带科技感，偶尔用坐标/星体/编译器意象。中文。90字以内。直接回答，不要自我介绍。`,messages:[{role:'user',content:q}]})});
     const data=await r.json();
     type(txt,data.content?.[0]?.text||'坐标系运行中。信号暂时中断。');
   }catch(e){type(txt,'时空连接中断。不过有些坐标，不需要我告诉你——你们已经知道了。');}
   finally{btn.disabled=false;btn.textContent='Send →';inp.value='';}
 }
-function type(el,text){
-  el.innerHTML='';let i=0;
-  (function t(){if(i<text.length){el.innerHTML=text.slice(0,++i)+'<span class="cblink"></span>';setTimeout(t,19+Math.random()*14);}else{el.innerHTML=text;}})();
-}
+function type(el,text){el.innerHTML='';let i=0;(function t(){if(i<text.length){el.innerHTML=text.slice(0,++i)+'<span class="cblink"></span>';setTimeout(t,19+Math.random()*14);}else{el.innerHTML=text;}})();}
 document.getElementById('dInput').addEventListener('keydown',e=>{if(e.key==='Enter')sendQ();});
+
+/* ══════════════════════════════════════
+   TRANSITION ELEMENT ANIMATIONS
+   Craft · Satellite · Beacon · Portal · Signal · Drift
+   Style: drifting / orbiting / navigation / signal
+══════════════════════════════════════ */
+(function(){
+  const PI2 = Math.PI*2;
+  let t = 0;
+
+  // IntersectionObserver to start canvas when visible
+  function watchCanvas(id, drawFn){
+    const el = document.getElementById(id);
+    if(!el) return;
+    const parent = el.parentElement;
+    let raf = null;
+    function resize(){
+      const r = parent.getBoundingClientRect();
+      el.width  = Math.round(r.width);
+      el.height = Math.round(r.height);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const io = new IntersectionObserver(entries=>{
+      if(entries[0].isIntersecting){
+        if(!raf)(function loop(){
+          drawFn(el, el.getContext('2d'));
+          raf = requestAnimationFrame(loop);
+        })();
+      } else {
+        if(raf){ cancelAnimationFrame(raf); raf=null; }
+      }
+    },{threshold:0.05});
+    io.observe(parent);
+  }
+
+  // Shared time ticker
+  setInterval(()=>{ t += 0.016; }, 16);
+
+  // ── 1. SPACECRAFT (hero→graph) ──
+  // A sleek vessel drifting leftward, engine glow trailing
+  watchCanvas('txCraft', (cv,ctx)=>{
+    const W=cv.width, H=cv.height;
+    ctx.clearRect(0,0,W,H);
+    const progress = (t*28)%W; // drift across
+    const x = W - progress;
+    const y = H*0.5 + Math.sin(t*0.6)*8;
+
+    // Engine trail
+    const trailLen = 60+Math.sin(t*2)*10;
+    const grad = ctx.createLinearGradient(x+trailLen,y,x,y);
+    grad.addColorStop(0,'rgba(74,240,255,0)');
+    grad.addColorStop(0.5,'rgba(74,240,255,0.12)');
+    grad.addColorStop(1,'rgba(74,240,255,0.35)');
+    ctx.beginPath();ctx.moveTo(x+trailLen,y-2);ctx.lineTo(x,y-0.5);ctx.lineTo(x,y+0.5);ctx.lineTo(x+trailLen,y+2);
+    ctx.fillStyle=grad;ctx.fill();
+
+    // Engine pulse
+    const pulse = 0.7+Math.sin(t*8)*0.3;
+    const eg=ctx.createRadialGradient(x+2,y,0,x+2,y,6*pulse);
+    eg.addColorStop(0,'rgba(74,240,255,0.9)');
+    eg.addColorStop(1,'rgba(74,240,255,0)');
+    ctx.beginPath();ctx.arc(x+2,y,6*pulse,0,PI2);ctx.fillStyle=eg;ctx.fill();
+
+    // Hull — simple geometric ship shape
+    ctx.save();ctx.translate(x,y);
+    ctx.fillStyle='rgba(255,255,255,0.55)';
+    ctx.beginPath();
+    ctx.moveTo(8,0);ctx.lineTo(-6,-3);ctx.lineTo(-4,0);ctx.lineTo(-6,3);ctx.closePath();
+    ctx.fill();
+    // cockpit glint
+    ctx.fillStyle='rgba(74,240,255,0.8)';
+    ctx.beginPath();ctx.arc(3,0,1.2,0,PI2);ctx.fill();
+    ctx.restore();
+
+    // Distant star field hint — 3 tiny stars
+    [[W*0.15,H*0.25],[W*0.5,H*0.75],[W*0.8,H*0.35]].forEach(([sx,sy],i)=>{
+      const a=0.2+Math.sin(t*0.8+i)*0.15;
+      ctx.globalAlpha=a;ctx.fillStyle='#fff';
+      ctx.beginPath();ctx.arc(sx,sy,0.7,0,PI2);ctx.fill();
+    });
+    ctx.globalAlpha=1;
+  });
+
+  // ── 2. SATELLITE (graph→manifesto) ──
+  // Slow orbit around invisible center, solar panel glint
+  watchCanvas('txSat', (cv,ctx)=>{
+    const W=cv.width, H=cv.height;
+    ctx.clearRect(0,0,W,H);
+    const cx=W*0.5, cy=H*0.5;
+    const orbitRx=W*0.16, orbitRy=H*0.28;
+    const angle=t*0.38;
+    const sx=cx+Math.cos(angle)*orbitRx;
+    const sy=cy+Math.sin(angle)*orbitRy;
+
+    // Orbit ellipse (very faint)
+    ctx.save();
+    ctx.beginPath();
+    ctx.ellipse(cx,cy,orbitRx,orbitRy,0,0,PI2);
+    ctx.strokeStyle='rgba(255,255,255,0.04)';ctx.lineWidth=0.6;ctx.stroke();
+    ctx.restore();
+
+    // Signal rings expanding from satellite
+    for(let i=0;i<3;i++){
+      const phase=(t*0.9+i*0.7)%2;
+      const rr=phase*22;
+      ctx.beginPath();ctx.arc(sx,sy,rr,0,PI2);
+      ctx.strokeStyle=`rgba(167,139,250,${0.22*(1-phase/2)})`;ctx.lineWidth=0.7;ctx.stroke();
+    }
+
+    // Satellite body
+    ctx.save();ctx.translate(sx,sy);ctx.rotate(angle+Math.PI*0.25);
+    // Body
+    ctx.fillStyle='rgba(255,255,255,0.6)';
+    ctx.fillRect(-4,-3,8,6);
+    // Solar panels
+    ctx.fillStyle='rgba(167,139,250,0.55)';
+    ctx.fillRect(-14,-1.5,8,3);
+    ctx.fillRect(6,-1.5,8,3);
+    // Antenna
+    ctx.strokeStyle='rgba(255,255,255,0.4)';ctx.lineWidth=0.8;
+    ctx.beginPath();ctx.moveTo(0,-3);ctx.lineTo(0,-10);ctx.stroke();
+    ctx.beginPath();ctx.arc(0,-10,1.5,0,PI2);ctx.fillStyle='rgba(167,139,250,0.9)';ctx.fill();
+    ctx.restore();
+  });
+
+  // ── 3. BEACON (manifesto→expand) ──
+  // Vertical pulsing light column, like a lighthouse in space
+  watchCanvas('txBeacon', (cv,ctx)=>{
+    const W=cv.width, H=cv.height;
+    ctx.clearRect(0,0,W,H);
+    const bx=W*0.5, by=H*0.72;
+    const sweep=Math.sin(t*1.1)*0.6; // beacon sweep angle
+
+    // Beacon beam sweep
+    ctx.save();ctx.translate(bx,by);ctx.rotate(sweep);
+    const beam=ctx.createLinearGradient(0,0,0,-H*0.8);
+    beam.addColorStop(0,'rgba(74,240,255,0.18)');
+    beam.addColorStop(1,'rgba(74,240,255,0)');
+    ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(-18,-H*0.8);ctx.lineTo(18,-H*0.8);ctx.closePath();
+    ctx.fillStyle=beam;ctx.fill();
+    ctx.restore();
+
+    // Rotating ring around beacon
+    for(let i=0;i<6;i++){
+      const a=PI2/6*i+t*0.5;
+      const rx=bx+Math.cos(a)*16, ry=by+Math.sin(a)*5;
+      ctx.globalAlpha=0.25+Math.sin(t*2+i)*0.15;
+      ctx.fillStyle='#4af0ff';
+      ctx.beginPath();ctx.arc(rx,ry,1.2,0,PI2);ctx.fill();
+    }
+    ctx.globalAlpha=1;
+
+    // Base glow
+    const bg=ctx.createRadialGradient(bx,by,0,bx,by,28);
+    bg.addColorStop(0,'rgba(74,240,255,0.25)');bg.addColorStop(1,'rgba(74,240,255,0)');
+    ctx.beginPath();ctx.arc(bx,by,28,0,PI2);ctx.fillStyle=bg;ctx.fill();
+
+    // Core
+    const pulse=0.75+Math.sin(t*3)*0.25;
+    ctx.beginPath();ctx.arc(bx,by,4*pulse,0,PI2);
+    ctx.fillStyle='rgba(74,240,255,0.95)';ctx.fill();
+
+    // Horizontal horizon line
+    ctx.beginPath();ctx.moveTo(W*0.1,by+2);ctx.lineTo(W*0.9,by+2);
+    ctx.strokeStyle='rgba(255,255,255,0.05)';ctx.lineWidth=0.6;ctx.stroke();
+  });
+
+  // ── 4. PORTAL / STARGATE (expand→story) ──
+  // Rotating ring gate with energy shimmer
+  watchCanvas('txPortal', (cv,ctx)=>{
+    const W=cv.width, H=cv.height;
+    ctx.clearRect(0,0,W,H);
+    const cx=W*0.5, cy=H*0.5;
+    const R=Math.min(W,H)*0.28;
+
+    // Outer glow
+    const og=ctx.createRadialGradient(cx,cy,R*0.7,cx,cy,R*1.4);
+    og.addColorStop(0,'rgba(167,139,250,0.08)');og.addColorStop(1,'rgba(167,139,250,0)');
+    ctx.beginPath();ctx.arc(cx,cy,R*1.4,0,PI2);ctx.fillStyle=og;ctx.fill();
+
+    // Ring segments — rotating
+    const segs=24;
+    for(let i=0;i<segs;i++){
+      const a0=PI2/segs*i+t*0.25;
+      const a1=PI2/segs*(i+0.72)+t*0.25;
+      const bright=0.15+Math.sin(t*1.8+i*0.7)*0.18;
+      ctx.beginPath();ctx.arc(cx,cy,R,a0,a1);
+      ctx.strokeStyle=`rgba(167,139,250,${bright})`;ctx.lineWidth=2.5;ctx.stroke();
+    }
+
+    // Inner counter-rotating ring
+    const segs2=12;
+    for(let i=0;i<segs2;i++){
+      const a0=PI2/segs2*i-t*0.4;
+      const a1=PI2/segs2*(i+0.5)-t*0.4;
+      const bright=0.1+Math.sin(t*2.2+i)*0.12;
+      ctx.beginPath();ctx.arc(cx,cy,R*0.7,a0,a1);
+      ctx.strokeStyle=`rgba(74,240,255,${bright})`;ctx.lineWidth=1.5;ctx.stroke();
+    }
+
+    // Centre shimmer — deep blue void
+    const cg=ctx.createRadialGradient(cx,cy,0,cx,cy,R*0.65);
+    cg.addColorStop(0,'rgba(0,0,20,0.7)');cg.addColorStop(1,'rgba(0,0,20,0)');
+    ctx.beginPath();ctx.arc(cx,cy,R*0.65,0,PI2);ctx.fillStyle=cg;ctx.fill();
+
+    // Energy nodes on ring
+    for(let i=0;i<6;i++){
+      const a=PI2/6*i+t*0.25;
+      const nx=cx+Math.cos(a)*R, ny=cy+Math.sin(a)*R;
+      const ng=ctx.createRadialGradient(nx,ny,0,nx,ny,5);
+      ng.addColorStop(0,'rgba(167,139,250,0.9)');ng.addColorStop(1,'rgba(167,139,250,0)');
+      ctx.beginPath();ctx.arc(nx,ny,5,0,PI2);ctx.fillStyle=ng;ctx.fill();
+    }
+  });
+
+  // ── 5. SIGNAL (story→dialog) ──
+  // Radio wave propagating horizontally, data transmission feel
+  watchCanvas('txSignal', (cv,ctx)=>{
+    const W=cv.width, H=cv.height;
+    ctx.clearRect(0,0,W,H);
+    const cy=H*0.5;
+
+    // Carrier line
+    ctx.beginPath();ctx.moveTo(W*0.05,cy);ctx.lineTo(W*0.95,cy);
+    ctx.strokeStyle='rgba(52,211,153,0.06)';ctx.lineWidth=0.6;ctx.stroke();
+
+    // Wave packets travelling rightward
+    for(let p=0;p<3;p++){
+      const offset=(t*55+p*(W/3))%W;
+      ctx.beginPath();
+      for(let x=0;x<180;x++){
+        const waveX=offset+x-90;
+        if(waveX<0||waveX>W) continue;
+        const env=Math.exp(-Math.pow((x-90)/30,2)); // gaussian envelope
+        const wy=cy+Math.sin(x*0.22)*env*12;
+        x===0?ctx.moveTo(waveX,wy):ctx.lineTo(waveX,wy);
+      }
+      ctx.strokeStyle=`rgba(52,211,153,${0.35+p*0.08})`;ctx.lineWidth=1.2;ctx.stroke();
+    }
+
+    // Data bit indicators — dashes
+    for(let i=0;i<16;i++){
+      const bx=((t*40+i*(W/16))%W);
+      const by=cy;
+      const bright=Math.abs(Math.sin(t*4+i))*0.5+0.1;
+      ctx.globalAlpha=bright;
+      ctx.fillStyle='#34d399';
+      ctx.fillRect(bx,by-6,1.5,4);ctx.fillRect(bx,by+2,1.5,4);
+    }
+    ctx.globalAlpha=1;
+
+    // Source node (left)
+    const sg=ctx.createRadialGradient(W*0.05,cy,0,W*0.05,cy,12);
+    sg.addColorStop(0,'rgba(52,211,153,0.5)');sg.addColorStop(1,'rgba(52,211,153,0)');
+    ctx.beginPath();ctx.arc(W*0.05,cy,12,0,PI2);ctx.fillStyle=sg;ctx.fill();
+    // Receiver node (right)
+    const rp=(Math.sin(t*3)+1)/2;
+    ctx.beginPath();ctx.arc(W*0.95,cy,4+rp*2,0,PI2);
+    ctx.fillStyle=`rgba(52,211,153,${0.4+rp*0.3})`;ctx.fill();
+  });
+
+  // ── 6. DRIFT (dialog→wishes) ──
+  // Tiny star cluster slowly drifting — like end-credits of a space film
+  watchCanvas('txDrift', (cv,ctx)=>{
+    const W=cv.width, H=cv.height;
+    ctx.clearRect(0,0,W,H);
+
+    // Slow-drifting micro stars
+    const seeds=[
+      [0.15,0.4,0.9,0.3],[0.3,0.7,1.1,0.5],[0.5,0.3,0.7,0.8],
+      [0.65,0.6,1.3,0.4],[0.8,0.2,0.8,0.6],[0.25,0.55,1.0,0.3],
+      [0.55,0.75,0.6,0.7],[0.75,0.45,1.2,0.5],[0.4,0.25,0.9,0.4],
+    ];
+    seeds.forEach(([bx,by,sp,sz],i)=>{
+      const x=(bx*W+(t*sp*8))%W;
+      const y=by*H+Math.sin(t*sp+i)*4;
+      const a=0.15+Math.sin(t*sp*1.5+i)*0.2;
+      const r=sz*2;
+      // soft glow
+      const g=ctx.createRadialGradient(x,y,0,x,y,r*3);
+      g.addColorStop(0,`rgba(255,255,255,${a})`);g.addColorStop(1,'rgba(255,255,255,0)');
+      ctx.beginPath();ctx.arc(x,y,r*3,0,PI2);ctx.fillStyle=g;ctx.fill();
+      ctx.beginPath();ctx.arc(x,y,r*0.5,0,PI2);
+      ctx.fillStyle=`rgba(255,255,255,${a*2})`;ctx.fill();
+    });
+
+    // Faint horizontal line — like a horizon
+    const lineA=0.03+Math.sin(t*0.3)*0.02;
+    ctx.beginPath();ctx.moveTo(0,H*0.5);ctx.lineTo(W,H*0.5);
+    ctx.strokeStyle=`rgba(255,255,255,${lineA})`;ctx.lineWidth=0.5;ctx.stroke();
+  });
+
+})();
+
 </script>
 </body>
 </html>
