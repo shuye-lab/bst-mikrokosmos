@@ -2,23 +2,29 @@
 
 ## Overview
 
-BST Mikrokosmos 是 BST 十周年的一份礼物，也是一次对工具链团队自身工作的重新凝视。
-
-我们把工具链面对的优化空间想象成一个小宇宙——Accuracy、Performance、Memory、Environment 是四个相互博弈的星系，每颗星球都是一个独立的工程维度。真正的全局最优解从来不存在，我们的工作，是在客户的 DDL 内，不断逼近它。
-
-Toolchain 扩大了人类的探索半径。加入 AI 之后，这个半径再次量级扩展。
-
-这个网页是这段旅程的视觉化——一场从芯片出发、穿越高维优化空间的星际航行。
+一个为 BST 十周年而生的交互式小宇宙——用星河比喻工程，用 AI 想象未来。
 
 ---
 
-BST Mikrokosmos is a gift from the BST Toolchain Team to mark ten years of work — and a quiet moment to look at what we actually do.
+芯片是一个小宇宙。Accuracy、Performance、Memory、Environment 是四个相互博弈的星系，每颗星球是一个真实的工程维度。工具链团队的工作，是在 DDL 内不断逼近一个从不真正存在的全局最优解。
 
-We imagine the optimization space as a small universe. Accuracy, Performance, Memory, and Environment are four galaxies in constant tension with each other. Every star is an independent engineering dimension. A true global optimum never exists — our work is to keep approaching it, within the constraints of every customer deadline.
+工程师提出世界观，由 AI 共同构建：叙事逻辑、知识星河、2030 年的故事线、与未来工具链的对话——都是人类直觉与 AI 算力协作的产物。
 
-The toolchain expands the radius of human exploration. With AI, that radius grows by another order of magnitude.
+受 BTS《Mikrokosmos》启发，彩蛋主题曲伴随整段旅程，陪你穿越六个章节、探索三十二颗星球，抵达写给未来自己的那句话：
 
-This site is the visualization of that journey — a voyage through a high-dimensional chip universe, navigating toward a future that is always one iteration closer.
+**探索半径，永远可以再大一点。**
+
+---
+
+An interactive universe built for BST Toolchain Team's 10th anniversary — using a star field to describe engineering, and AI to imagine the future.
+
+A chip is a small universe. Accuracy, Performance, Memory, Environment — four galaxies in tension. Every star is a real engineering dimension. Our work is to keep approaching a global optimum that never truly exists, within every customer deadline.
+
+This world was conceived by engineers and co-authored with AI: the narrative, the knowledge galaxy, the story of 2030, the dialogue with a future toolchain — all shaped by human intuition and AI working together.
+
+Inspired by BTS's *Mikrokosmos*, the theme song accompanies the full journey — six chapters, thirty-two planets, and a message written to your future self.
+
+**The radius of exploration can always go further.**
 
 ## Project Introduction
 
